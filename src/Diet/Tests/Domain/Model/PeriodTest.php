@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Diet\Tests\Diet\Domain\Model;
+namespace App\Diet\Tests\Domain\Model;
 
 use App\Diet\Domain\Model\Day;
 use App\Diet\Domain\Model\DietPlan;

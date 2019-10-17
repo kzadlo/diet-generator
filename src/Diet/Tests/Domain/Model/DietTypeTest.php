@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Diet\Domain\Model;
+namespace App\Tests\Domain\Model;
 
 use App\Diet\Domain\Model\DietType;
 use PHPUnit\Framework\TestCase;
