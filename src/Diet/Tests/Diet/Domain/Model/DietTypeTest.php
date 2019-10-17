@@ -26,25 +26,21 @@ class DietTypeTest extends TestCase
     public function testCanChangeName()
     {
         $this->dietType->changeName('Diet Name 2');
-
         $this->assertSame('Diet Name 2', $this->dietType->getName());
     }
 
     public function testCanAddDescription()
     {
         $this->dietType->addDescription('Description for Diet Type');
-
         $this->assertSame('Description for Diet Type', $this->dietType->getDescription());
     }
 
     public function testCanRemoveDescription()
     {
         $this->dietType->addDescription('Description for Diet Type');
-
         $this->assertTrue($this->dietType->hasDescription());
 
         $this->dietType->removeDescription();
-
         $this->expectException(\BadMethodCallException::class);
         $this->dietType->getDescription();
     }

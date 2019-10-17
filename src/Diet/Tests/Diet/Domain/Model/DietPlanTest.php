@@ -22,13 +22,19 @@ class DietPlanTest extends TestCase
     {
         $this->assertInstanceOf(UuidInterface::class, $this->dietPlan->getId());
         $this->assertInstanceOf(DietType::class, $this->dietPlan->getType());
+        $this->assertSame(DietPlan::STANDARD_QUANTITY_DAYS, $this->dietPlan->getQuantityDays());
     }
 
     public function testCanChangeType()
     {
         $type = new DietType('Diet Name 2');
         $this->dietPlan->changeType($type);
-
         $this->assertSame($type, $this->dietPlan->getType());
+    }
+
+    public function testCanChangeQuantityDays()
+    {
+        $this->dietPlan->changeQuantityDays(5);
+        $this->assertSame(5, $this->dietPlan->getQuantityDays());
     }
 }
