@@ -14,19 +14,19 @@ class DietTypeTest extends TestCase
 
     protected function setUp()
     {
-        $this->dietType = new DietType('Diet Name');
+        $this->dietType = new DietType('Diet Type Name');
     }
 
     public function testEntityIsValidAfterCreation()
     {
         $this->assertInstanceOf(UuidInterface::class, $this->dietType->getId());
-        $this->assertSame('Diet Name', $this->dietType->getName());
+        $this->assertSame('Diet Type Name', $this->dietType->getName());
     }
 
     public function testCanChangeName()
     {
-        $this->dietType->changeName('Diet Name 2');
-        $this->assertSame('Diet Name 2', $this->dietType->getName());
+        $this->dietType->changeName('Diet Type Name 2');
+        $this->assertSame('Diet Type Name 2', $this->dietType->getName());
     }
 
     public function testCanAddDescription()

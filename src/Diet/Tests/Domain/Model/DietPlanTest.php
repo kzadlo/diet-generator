@@ -15,7 +15,7 @@ class DietPlanTest extends TestCase
 
     protected function setUp()
     {
-        $this->dietPlan = new DietPlan(new DietType('Diet Name'));
+        $this->dietPlan = new DietPlan(new DietType('Diet Type Name'));
     }
 
     public function testEntityIsValidAfterCreation()
@@ -27,7 +27,7 @@ class DietPlanTest extends TestCase
 
     public function testCanChangeType()
     {
-        $type = new DietType('Diet Name 2');
+        $type = new DietType('Diet Type Name 2');
         $this->dietPlan->changeType($type);
         $this->assertSame($type, $this->dietPlan->getType());
     }

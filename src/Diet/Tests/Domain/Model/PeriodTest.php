@@ -8,6 +8,7 @@ use App\Diet\Domain\Model\Day;
 use App\Diet\Domain\Model\DietPlan;
 use App\Diet\Domain\Model\DietType;
 use App\Diet\Domain\Model\Period;
+use Doctrine\Common\Collections\Collection;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\UuidInterface;
 
@@ -28,6 +29,7 @@ class PeriodTest extends TestCase
     {
         $this->assertInstanceOf(UuidInterface::class, $this->period->getId());
         $this->assertInstanceOf(DietPlan::class, $this->period->getDietPlan());
+        $this->assertInstanceOf(Collection::class, $this->period->getDays());
         $this->assertEmpty($this->period->getDays());
     }
 
