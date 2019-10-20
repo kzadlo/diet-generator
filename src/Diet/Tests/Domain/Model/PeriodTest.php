@@ -42,13 +42,13 @@ class PeriodTest extends TestCase
 
     public function testCanAddDay()
     {
-        $this->period->addDay(new Day('Name'));
+        $this->period->addDay(new Day('Name', new \DateTime()));
         $this->assertEquals(1, $this->period->countDays());
     }
 
     public function testCannotAddSameDay()
     {
-        $day = new Day('Name');
+        $day = new Day('Name', new \DateTime());
         $this->period->addDay($day);
         $this->period->addDay($day);
         $this->assertEquals(1, $this->period->countDays());
@@ -56,8 +56,8 @@ class PeriodTest extends TestCase
 
     public function testCanClearDays()
     {
-        $this->period->addDay(new Day('Name'));
-        $this->period->addDay(new Day('Name'));
+        $this->period->addDay(new Day('Name', new \DateTime()));
+        $this->period->addDay(new Day('Name', new \DateTime()));
         $this->assertEquals(2, $this->period->countDays());
 
         $this->period->clearDays();

@@ -13,10 +13,13 @@ class Day
 
     private $name;
 
-    public function __construct(string $name)
+    private $date;
+
+    public function __construct(string $name, \DateTimeInterface $date)
     {
         $this->id = Uuid::uuid4();
         $this->name = $name;
+        $this->date = $date;
     }
 
     public function getId(): UuidInterface
@@ -32,6 +35,17 @@ class Day
     public function changeName(string $name): Day
     {
         $this->name = $name;
+        return $this;
+    }
+
+    public function getDate(): \DateTimeInterface
+    {
+        return $this->date;
+    }
+
+    public function changeDate(\DateTimeInterface $date): Day
+    {
+        $this->date = $date;
         return $this;
     }
 }
