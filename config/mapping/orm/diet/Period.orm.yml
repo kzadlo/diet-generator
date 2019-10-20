@@ -1,0 +1,27 @@
+App\Diet\Domain\Model\Period:
+  type: entity
+  table: period
+  id:
+    id:
+      type: uuid
+      unique: true
+  manyToOne:
+    dietPlan:
+      targetEntity: DietPlan
+      joinColumn:
+        name: diet_plan_id
+        referencedColumnName: id
+  manyToMany:
+    days:
+      targetEntity: Day
+      joinTable:
+        name: period_days
+        joinColumns:
+          period_id:
+            name: period_id
+            referencedColumnName: id
+        inverseJoinColumns:
+          day_id:
+            name: day_id
+            referencedColumnName: id
+            unique: true

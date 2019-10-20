@@ -1,0 +1,14 @@
+App\Diet\Domain\Model\Day:
+  type: entity
+  table: day
+  id:
+    id:
+      type: uuid
+      unique: true
+  fields:
+    name:
+      column: name
+      type: string
+    date:
+      column: date
+      type: datetime
