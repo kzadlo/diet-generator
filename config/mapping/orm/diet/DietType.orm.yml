@@ -1,0 +1,15 @@
+App\Diet\Domain\Model\DietType:
+  type: entity
+  table: diet_type
+  id:
+    id:
+      type: uuid
+      unique: true
+  fields:
+    name:
+      column: name
+      type: string
+    description:
+      column: description
+      type: string
+      nullable: true

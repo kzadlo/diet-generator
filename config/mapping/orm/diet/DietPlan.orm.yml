@@ -1,0 +1,17 @@
+App\Diet\Domain\Model\DietPlan:
+  type: entity
+  table: diet_plan
+  id:
+    id:
+      type: uuid
+      unique: true
+  fields:
+    quantityDays:
+      column: quantity_days
+      type: integer
+  oneToOne:
+    dietType:
+      targetEntity: DietType
+      joinColumn:
+        name: diet_type_id
+        referencedColumnName: id

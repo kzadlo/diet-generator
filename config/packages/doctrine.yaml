@@ -16,7 +16,7 @@ doctrine:
         mappings:
             Diet:
                 is_bundle: false
-                type: annotation
-                dir: '%kernel.project_dir%/src/Diet/Domain/Model'
+                type: yml
+                dir: '%kernel.project_dir%/config/mapping/orm/diet'
                 prefix: 'App\Diet\Domain\Model'
                 alias: Diet
