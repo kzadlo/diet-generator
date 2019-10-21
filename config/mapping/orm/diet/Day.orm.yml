@@ -12,3 +12,10 @@ App\Diet\Domain\Model\Day:
     date:
       column: date
       type: datetime
+  manyToOne:
+    period:
+      targetEntity: Period
+      inversedBy: days
+      joinColumn:
+        name: period_id
+        referencedColumnName: id

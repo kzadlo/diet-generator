@@ -15,6 +15,8 @@ class Day
 
     private $date;
 
+    private $period;
+
     public function __construct(string $name, \DateTimeInterface $date)
     {
         $this->id = Uuid::uuid4();
@@ -46,6 +48,17 @@ class Day
     public function changeDate(\DateTimeInterface $date): Day
     {
         $this->date = $date;
+        return $this;
+    }
+
+    public function getPeriod(): ?Period
+    {
+        return $this->period;
+    }
+
+    public function setPeriod(?Period $period): Day
+    {
+        $this->period = $period;
         return $this;
     }
 }

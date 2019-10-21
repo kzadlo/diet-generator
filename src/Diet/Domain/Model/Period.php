@@ -49,6 +49,7 @@ class Period
     {
         if (!$this->days->contains($day)) {
             $this->days->add($day);
+            $day->setPeriod($this);
         }
         return $this;
     }

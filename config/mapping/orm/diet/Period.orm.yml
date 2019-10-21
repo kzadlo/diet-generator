@@ -11,17 +11,8 @@ App\Diet\Domain\Model\Period:
       joinColumn:
         name: diet_plan_id
         referencedColumnName: id
-  manyToMany:
+  oneToMany:
     days:
       targetEntity: Day
-      joinTable:
-        name: period_days
-        joinColumns:
-          period_id:
-            name: period_id
-            referencedColumnName: id
-        inverseJoinColumns:
-          day_id:
-            name: day_id
-            referencedColumnName: id
-            unique: true
+      mappedBy: period
+      orphanRemoval: true
