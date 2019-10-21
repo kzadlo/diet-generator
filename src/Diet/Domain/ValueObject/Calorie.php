@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Diet\Domain\ValueObject;
 
-class Calorie
+final class Calorie
 {
     public const RANGE_SIZE = 15;
 
