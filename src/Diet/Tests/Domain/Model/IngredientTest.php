@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace App\Diet\Tests\Domain\Model;
 
 use App\Diet\Domain\Model\Ingredient;
+use App\Diet\Domain\Model\Meal;
 use App\Diet\Domain\Model\Product;
+use App\Diet\Domain\ValueObject\Calorie;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\UuidInterface;
 
@@ -37,5 +39,12 @@ class IngredientTest extends TestCase
     public function testCanGetWeightWithUnit()
     {
         $this->assertEquals('100 g', $this->ingredient->getWeightWithUnit());
+    }
+
+    public function testCanSetMeal()
+    {
+        $meal = new Meal('Meal Name', new Calorie(200));
+        $this->ingredient->setMeal($meal);
+        $this->assertSame($meal, $this->ingredient->getMeal());
     }
 }

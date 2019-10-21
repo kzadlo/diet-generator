@@ -1,0 +1,17 @@
+App\Diet\Domain\Model\Recipe:
+  type: entity
+  table: recipe
+  id:
+    id:
+      type: uuid
+      unique: true
+  fields:
+    cookingTime:
+      column: cooking_time
+      type: integer
+      nullable: true
+  oneToMany:
+    steps:
+      targetEntity: RecipeStep
+      mappedBy: recipe
+      orphanRemoval: true

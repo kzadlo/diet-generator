@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Diet\Domain\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
@@ -17,11 +19,14 @@ class Day
 
     private $period;
 
+    private $meals;
+
     public function __construct(string $name, \DateTimeInterface $date)
     {
         $this->id = Uuid::uuid4();
         $this->name = $name;
         $this->date = $date;
+        $this->meals = new ArrayCollection();
     }
 
     public function getId(): UuidInterface
@@ -59,6 +64,31 @@ class Day
     public function setPeriod(?Period $period): Day
     {
         $this->period = $period;
+        return $this;
+    }
+
+    public function getMeals(): Collection
+    {
+        return $this->meals;
+    }
+
+    public function addMeal(Meal $meal): Day
+    {
+        if (!$this->meals->contains($meal)) {
+            $this->meals->add($meal);
+            $meal->setDay($this);
+        }
+        return $this;
+    }
+
+    public function countMeals(): int
+    {
+        return $this->meals->count();
+    }
+
+    public function clearMeals(): Day
+    {
+        $this->meals->clear();
         return $this;
     }
 }

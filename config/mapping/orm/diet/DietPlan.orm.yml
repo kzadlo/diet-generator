@@ -6,8 +6,8 @@ App\Diet\Domain\Model\DietPlan:
       type: uuid
       unique: true
   fields:
-    quantityDays:
-      column: quantity_days
+    daysQuantity:
+      column: days_quantity
       type: integer
   oneToOne:
     dietType:

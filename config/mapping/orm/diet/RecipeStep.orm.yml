@@ -1,0 +1,21 @@
+App\Diet\Domain\Model\RecipeStep:
+  type: entity
+  table: recipe_step
+  id:
+    id:
+      type: uuid
+      unique: true
+  fields:
+    description:
+      column: description
+      type: string
+    order:
+      column: order
+      type: integer
+  manyToOne:
+    recipe:
+      targetEntity: Recipe
+      inversedBy: steps
+      joinColumn:
+        name: recipe_id
+        referencedColumnName: id

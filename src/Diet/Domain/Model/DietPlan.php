@@ -15,13 +15,13 @@ class DietPlan
 
     private $dietType;
 
-    private $quantityDays;
+    private $daysQuantity;
 
     public function __construct(DietType $dietType)
     {
         $this->id = Uuid::uuid4();
         $this->dietType = $dietType;
-        $this->quantityDays = self::STANDARD_QUANTITY_DAYS;
+        $this->daysQuantity = self::STANDARD_QUANTITY_DAYS;
     }
 
     public function getId(): UuidInterface
@@ -40,14 +40,14 @@ class DietPlan
         return $this;
     }
 
-    public function getQuantityDays(): int
+    public function getDaysQuantity(): int
     {
-        return $this->quantityDays;
+        return $this->daysQuantity;
     }
 
-    public function changeQuantityDays(int $quantityDays): DietPlan
+    public function changeDaysQuantity(int $daysQuantity): DietPlan
     {
-        $this->quantityDays = $quantityDays;
+        $this->daysQuantity = $daysQuantity;
         return $this;
     }
 }

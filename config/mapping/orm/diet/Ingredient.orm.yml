@@ -1,0 +1,23 @@
+App\Diet\Domain\Model\Ingredient:
+  type: entity
+  table: ingredient
+  id:
+    id:
+      type: uuid
+      unique: true
+  fields:
+    weight:
+      column: weight
+      type: integer
+  manyToOne:
+    product:
+      targetEntity: Product
+      joinColumn:
+        name: product_id
+        referencedColumnName: id
+    meal:
+      targetEntity: Meal
+      inversedBy: ingredients
+      joinColumn:
+        name: meal_id
+        referencedColumnName: id

@@ -15,6 +15,8 @@ class RecipeStep
 
     private $order;
 
+    private $recipe;
+
     public function __construct(string $description, int $order)
     {
         $this->id = Uuid::uuid4();
@@ -40,6 +42,17 @@ class RecipeStep
     public function changeOrder(int $order): RecipeStep
     {
         $this->order = $order;
+        return $this;
+    }
+
+    public function getRecipe(): ?Recipe
+    {
+        return $this->recipe;
+    }
+
+    public function setRecipe(?Recipe $recipe): RecipeStep
+    {
+        $this->recipe = $recipe;
         return $this;
     }
 }

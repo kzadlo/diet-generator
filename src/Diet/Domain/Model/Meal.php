@@ -22,14 +22,16 @@ class Meal
 
     private $recipe;
 
-    private $calorieQuantity;
+    private $caloriesQuantity;
+
+    private $day;
 
     public function __construct(string $name, Calorie $calorie)
     {
         $this->id = Uuid::uuid4();
         $this->name = $name;
         $this->ingredients = new ArrayCollection();
-        $this->calorieQuantity = $calorie->getQuantity();
+        $this->caloriesQuantity = $calorie->getQuantity();
     }
 
     public function getId(): UuidInterface
@@ -61,7 +63,7 @@ class Meal
 
     public function getCalorie(): Calorie
     {
-        return new Calorie($this->calorieQuantity);
+        return new Calorie($this->caloriesQuantity);
     }
 
     public function getIngredients(): Collection
@@ -73,6 +75,7 @@ class Meal
     {
         if (!$this->ingredients->contains($ingredient)) {
             $this->ingredients->add($ingredient);
+            $ingredient->setMeal($this);
         }
         return $this;
     }
@@ -102,6 +105,17 @@ class Meal
     public function deleteRecipe(): Meal
     {
         $this->recipe = null;
+        return $this;
+    }
+
+    public function getDay(): ?Day
+    {
+        return $this->day;
+    }
+
+    public function setDay(?Day $day): Meal
+    {
+        $this->day = $day;
         return $this;
     }
 }

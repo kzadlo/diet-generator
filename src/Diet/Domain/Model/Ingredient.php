@@ -17,6 +17,8 @@ class Ingredient
 
     private $weight;
 
+    private $meal;
+
     public function __construct(Product $product, int $weight)
     {
         $this->id = Uuid::uuid4();
@@ -47,6 +49,17 @@ class Ingredient
     public function changeWeight(int $weight): Ingredient
     {
         $this->weight = $weight;
+        return $this;
+    }
+
+    public function getMeal(): ?Meal
+    {
+        return $this->meal;
+    }
+
+    public function setMeal(?Meal $meal): Ingredient
+    {
+        $this->meal = $meal;
         return $this;
     }
 }

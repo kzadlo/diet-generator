@@ -80,6 +80,7 @@ class Recipe
             }
         }
         $this->steps->add($recipeStep);
+        $recipeStep->setRecipe($this);
         return $this;
     }
 

@@ -50,13 +50,10 @@ class MealTest extends TestCase
 
     public function testCanAddIngredient()
     {
-        $this->meal->addIngredient(
-            new Ingredient(
-                new Product('Product Name'),
-                100
-            )
-        );
+        $ingredient = new Ingredient(new Product('Product Name'), 100);
+        $this->meal->addIngredient($ingredient);
         $this->assertEquals(1, $this->meal->countIngredients());
+        $this->assertSame($ingredient->getMeal(), $this->meal);
     }
 
     public function testCannotAddSameIngredient()

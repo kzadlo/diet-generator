@@ -1,0 +1,37 @@
+App\Diet\Domain\Model\Meal:
+  type: entity
+  table: meal
+  id:
+    id:
+      type: uuid
+      unique: true
+  fields:
+    name:
+      column: name
+      type: string
+    caloriesQuantity:
+      column: calories_quantity
+      type: integer
+  oneToOne:
+    mealType:
+      targetEntity: MealType
+      joinColumn:
+        name: meal_type_id
+        referencedColumnName: id
+    recipe:
+      targetEntity: Recipe
+      joinColumn:
+        name: recipe_id
+        referencedColumnName: id
+  manyToOne:
+    day:
+      targetEntity: Day
+      inversedBy: meals
+      joinColumn:
+        name: day_id
+        referencedColumnName: id
+  oneToMany:
+    ingredients:
+      targetEntity: Ingredient
+      mappedBy: meal
+      orphanRemoval: true

@@ -40,8 +40,10 @@ class RecipeTest extends TestCase
 
     public function testCanAddStep()
     {
-        $this->recipe->addStep(new RecipeStep('Recipe description', 1));
+        $step = new RecipeStep('Recipe description', 1);
+        $this->recipe->addStep($step);
         $this->assertEquals(1, $this->recipe->countSteps());
+        $this->assertSame($step->getRecipe(), $this->recipe);
     }
 
     public function testCannotAddStepWithSameOrder()

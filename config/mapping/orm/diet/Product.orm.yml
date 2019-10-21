@@ -1,0 +1,11 @@
+App\Diet\Domain\Model\Product:
+  type: entity
+  table: product
+  id:
+    id:
+      type: uuid
+      unique: true
+  fields:
+    name:
+      column: name
+      type: string
