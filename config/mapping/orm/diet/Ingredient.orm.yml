@@ -1,6 +1,7 @@
 App\Diet\Domain\Model\Ingredient:
   type: entity
   table: ingredient
+  repositoryClass: App\Diet\Domain\Repository\IngredientRepository
   id:
     id:
       type: uuid
@@ -11,12 +12,12 @@ App\Diet\Domain\Model\Ingredient:
       type: integer
   manyToOne:
     product:
-      targetEntity: Product
+      targetEntity: App\Diet\Domain\Model\Product
       joinColumn:
         name: product_id
         referencedColumnName: id
     meal:
-      targetEntity: Meal
+      targetEntity: App\Diet\Domain\Model\Meal
       inversedBy: ingredients
       joinColumn:
         name: meal_id

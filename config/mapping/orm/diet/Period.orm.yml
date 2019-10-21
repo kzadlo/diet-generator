@@ -1,18 +1,19 @@
 App\Diet\Domain\Model\Period:
   type: entity
   table: period
+  repositoryClass: App\Diet\Domain\Repository\PeriodRepository
   id:
     id:
       type: uuid
       unique: true
   manyToOne:
     dietPlan:
-      targetEntity: DietPlan
+      targetEntity: App\Diet\Domain\Model\DietPlan
       joinColumn:
         name: diet_plan_id
         referencedColumnName: id
   oneToMany:
     days:
-      targetEntity: Day
+      targetEntity: App\Diet\Domain\Model\Day
       mappedBy: period
       orphanRemoval: true

@@ -1,6 +1,7 @@
 App\Diet\Domain\Model\Meal:
   type: entity
   table: meal
+  repositoryClass: App\Diet\Domain\Repository\MealRepository
   id:
     id:
       type: uuid
@@ -14,24 +15,24 @@ App\Diet\Domain\Model\Meal:
       type: integer
   oneToOne:
     mealType:
-      targetEntity: MealType
+      targetEntity: App\Diet\Domain\Model\MealType
       joinColumn:
         name: meal_type_id
         referencedColumnName: id
     recipe:
-      targetEntity: Recipe
+      targetEntity: App\Diet\Domain\Model\Recipe
       joinColumn:
         name: recipe_id
         referencedColumnName: id
   manyToOne:
     day:
-      targetEntity: Day
+      targetEntity: App\Diet\Domain\Model\Day
       inversedBy: meals
       joinColumn:
         name: day_id
         referencedColumnName: id
   oneToMany:
     ingredients:
-      targetEntity: Ingredient
+      targetEntity: App\Diet\Domain\Model\Ingredient
       mappedBy: meal
       orphanRemoval: true

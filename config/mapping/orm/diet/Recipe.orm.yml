@@ -1,6 +1,7 @@
 App\Diet\Domain\Model\Recipe:
   type: entity
   table: recipe
+  repositoryClass: App\Diet\Domain\Repository\RecipeRepository
   id:
     id:
       type: uuid
@@ -12,6 +13,6 @@ App\Diet\Domain\Model\Recipe:
       nullable: true
   oneToMany:
     steps:
-      targetEntity: RecipeStep
+      targetEntity: App\Diet\Domain\Model\RecipeStep
       mappedBy: recipe
       orphanRemoval: true

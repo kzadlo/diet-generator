@@ -1,6 +1,7 @@
 App\Diet\Domain\Model\Day:
   type: entity
   table: day
+  repositoryClass: App\Diet\Domain\Repository\DayRepository
   id:
     id:
       type: uuid
@@ -14,12 +15,12 @@ App\Diet\Domain\Model\Day:
       type: datetime
   manyToOne:
     period:
-      targetEntity: Period
+      targetEntity: App\Diet\Domain\Model\Period
       inversedBy: days
       joinColumn:
         name: period_id
         referencedColumnName: id
   oneToMany:
     meals:
-      targetEntity: Meal
+      targetEntity: App\Diet\Domain\Model\Meal
       mappedBy: day

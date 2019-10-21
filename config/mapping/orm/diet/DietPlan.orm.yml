@@ -1,6 +1,7 @@
 App\Diet\Domain\Model\DietPlan:
   type: entity
   table: diet_plan
+  repositoryClass: App\Diet\Domain\Repository\DietPlanRepository
   id:
     id:
       type: uuid
@@ -11,7 +12,7 @@ App\Diet\Domain\Model\DietPlan:
       type: integer
   oneToOne:
     dietType:
-      targetEntity: DietType
+      targetEntity: App\Diet\Domain\Model\DietType
       joinColumn:
         name: diet_type_id
         referencedColumnName: id
