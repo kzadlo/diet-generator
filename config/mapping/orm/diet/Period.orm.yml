@@ -1,7 +1,6 @@
 App\Diet\Domain\Model\Period:
   type: entity
   table: period
-  repositoryClass: App\Diet\Domain\Repository\PeriodRepository
   id:
     id:
       type: uuid

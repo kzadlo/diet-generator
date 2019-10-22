@@ -1,7 +1,6 @@
 App\Diet\Domain\Model\Recipe:
   type: entity
   table: recipe
-  repositoryClass: App\Diet\Domain\Repository\RecipeRepository
   id:
     id:
       type: uuid
