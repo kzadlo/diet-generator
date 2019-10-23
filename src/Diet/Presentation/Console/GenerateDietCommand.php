@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Diet\Infrastructure\Console;
+namespace App\Diet\Presentation\Console;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -10,7 +10,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class GenerateDietCommand extends Command
 {
-    protected static $defaultName = 'app:generate-diet';
+    protected static $defaultName = 'diet:generate';
 
     protected function configure()
     {
