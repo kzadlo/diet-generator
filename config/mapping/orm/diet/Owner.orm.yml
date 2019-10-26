@@ -1,0 +1,28 @@
+App\Diet\Domain\Model\Owner:
+  type: entity
+  table: owner
+  id:
+    id:
+      type: uuid
+      unique: true
+  fields:
+    email:
+      column: email
+      type: string
+    firstName:
+      column: first_name
+      type: string
+      nullable: true
+    lastName:
+      column: last_name
+      type: string
+      nullable: true
+    birthDate:
+      column: birth_date
+      type: datetime
+  oneToOne:
+    bodyMeasurement:
+      targetEntity: App\Diet\Domain\Model\BodyMeasurement
+      joinColumn:
+        name: body_measurement_id
+        referencedColumnName: id

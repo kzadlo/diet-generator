@@ -1,0 +1,14 @@
+App\Diet\Domain\Model\BodyMeasurement:
+  type: entity
+  table: body_measurement
+  id:
+    id:
+      type: uuid
+      unique: true
+  fields:
+    height:
+      column: height
+      type: integer
+    weight:
+      column: weight
+      type: integer
