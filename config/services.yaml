@@ -8,3 +8,6 @@ services:
     App\:
         resource: '../src/*'
         exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
+
+    App\Diet\Application\Command\GenerateDietHandler:
+        public: true
