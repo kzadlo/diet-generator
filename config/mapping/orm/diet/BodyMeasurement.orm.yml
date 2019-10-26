@@ -15,3 +15,5 @@ App\Diet\Domain\Model\BodyMeasurement:
     activityRate:
       column: activity_rate
       type: decimal
+      precision: 4
+      scale: 2

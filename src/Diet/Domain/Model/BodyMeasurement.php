@@ -54,7 +54,7 @@ class BodyMeasurement
 
     public function getActivityRate(): float
     {
-        return $this->activityRate;
+        return (float) $this->activityRate;
     }
 
     public function changeActivityRate(float $activityRate): BodyMeasurement
