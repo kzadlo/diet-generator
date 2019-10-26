@@ -14,13 +14,13 @@ class CalorieCalculator
     public const ACTIVITY_HIGH = 1.75;
     public const ACTIVITY_TOP = 2.05;
 
-    public function calculateTotalMetabolicRate(Owner $owner, float $activity): int
+    public function calculateTotalMetabolicRate(Owner $owner): int
     {
         $bmr = $owner->isFemale()
             ? $this->femaleFormula($owner->getWeight(), $owner->getHeight(), $owner->getAge())
             : $this->maleFormula($owner->getWeight(), $owner->getHeight(), $owner->getAge());
 
-        return (int) round($bmr * $activity);
+        return (int) round($bmr * $owner->getActivityRate());
     }
 
     private function femaleFormula(float $weight, int $height, int $age): float

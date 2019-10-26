@@ -114,4 +114,9 @@ class Owner
     {
         return $this->bodyMeasurement->getKiloWeight();
     }
+
+    public function getActivityRate(): float
+    {
+        return $this->bodyMeasurement->getActivityRate();
+    }
 }

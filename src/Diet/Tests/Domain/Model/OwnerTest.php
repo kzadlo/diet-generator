@@ -6,6 +6,7 @@ namespace App\Diet\Tests\Domain\Model;
 
 use App\Diet\Domain\Model\BodyMeasurement;
 use App\Diet\Domain\Model\Owner;
+use App\Diet\Domain\Service\CalorieCalculator;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\UuidInterface;
 
@@ -19,7 +20,7 @@ class OwnerTest extends TestCase
             'test@email.com',
             Owner::SEX_MALE,
             new \DateTime('1995-06-19'),
-            new BodyMeasurement(180, 90.5)
+            new BodyMeasurement(180, 90.5, CalorieCalculator::ACTIVITY_LOW)
         );
     }
 
@@ -40,7 +41,7 @@ class OwnerTest extends TestCase
 
     public function testCanChangeBodyMeasurement()
     {
-        $bodyMeasurement = new BodyMeasurement(190, 100.5);
+        $bodyMeasurement = new BodyMeasurement(190, 100.5, CalorieCalculator::ACTIVITY_HIGH);
         $this->owner->changeBodyMeasurement($bodyMeasurement);
         $this->assertSame($bodyMeasurement, $this->owner->getBodyMeasurement());
     }
@@ -75,5 +76,10 @@ class OwnerTest extends TestCase
     public function testCanGetWeight()
     {
         $this->assertSame(90.5, $this->owner->getWeight());
+    }
+
+    public function testCanGetActivityRate()
+    {
+        $this->assertSame(1.35, $this->owner->getActivityRate());
     }
 }

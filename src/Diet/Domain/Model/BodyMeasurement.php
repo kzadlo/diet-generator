@@ -15,11 +15,14 @@ class BodyMeasurement
 
     private $weight;
 
-    public function __construct(int $height, float $weight)
+    private $activityRate;
+
+    public function __construct(int $height, float $weight, float $activityRate)
     {
         $this->id = Uuid::uuid4();
         $this->height = $height;
         $this->weight = $weight * 1000;
+        $this->activityRate = $activityRate;
     }
 
     public function getId(): UuidInterface
@@ -46,6 +49,17 @@ class BodyMeasurement
     public function changeWeight(float $weight): BodyMeasurement
     {
         $this->weight = $weight * 1000;
+        return $this;
+    }
+
+    public function getActivityRate(): float
+    {
+        return $this->activityRate;
+    }
+
+    public function changeActivityRate(float $activityRate): BodyMeasurement
+    {
+        $this->activityRate = $activityRate;
         return $this;
     }
 }

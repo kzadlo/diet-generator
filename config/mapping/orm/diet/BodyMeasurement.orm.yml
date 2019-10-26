@@ -12,3 +12,6 @@ App\Diet\Domain\Model\BodyMeasurement:
     weight:
       column: weight
       type: integer
+    activityRate:
+      column: activity_rate
+      type: decimal

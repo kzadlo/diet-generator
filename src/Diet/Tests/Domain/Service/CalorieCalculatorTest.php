@@ -25,10 +25,10 @@ class CalorieCalculatorTest extends TestCase
             'test@email.pl',
             $sex,
             (new \DateTime())->modify($age),
-            new BodyMeasurement($height, $weight)
+            new BodyMeasurement($height, $weight, $activity)
         );
 
-        $this->assertEquals($calories, $this->calorieCalculator->calculateTotalMetabolicRate($owner, $activity));
+        $this->assertEquals($calories, $this->calorieCalculator->calculateTotalMetabolicRate($owner));
     }
 
     public function provider()
