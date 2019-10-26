@@ -25,7 +25,7 @@ class PeriodTest extends TestCase
         );
     }
 
-    public function testEntityIsValidAfterCreation()
+    public function testIsEntityValidAfterCreation()
     {
         $this->assertInstanceOf(UuidInterface::class, $this->period->getId());
         $this->assertInstanceOf(DietPlan::class, $this->period->getDietPlan());

@@ -23,7 +23,7 @@ class IngredientTest extends TestCase
         );
     }
 
-    public function testEntityIsValidAfterCreation()
+    public function testIsEntityValidAfterCreation()
     {
         $this->assertInstanceOf(UuidInterface::class, $this->ingredient->getId());
         $this->assertInstanceOf(Product::class, $this->ingredient->getProduct());

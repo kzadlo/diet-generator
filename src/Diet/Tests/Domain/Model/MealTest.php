@@ -26,7 +26,7 @@ class MealTest extends TestCase
         );
     }
 
-    public function testEntityIsValidAfterCreation()
+    public function testIsEntityValidAfterCreation()
     {
         $this->assertInstanceOf(UuidInterface::class, $this->meal->getId());
         $this->assertSame('Meal Name', $this->meal->getName());;

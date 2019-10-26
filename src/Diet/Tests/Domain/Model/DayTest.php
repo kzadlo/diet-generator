@@ -23,7 +23,7 @@ class DayTest extends TestCase
         $this->day = new Day('Monday', new \DateTime());
     }
 
-    public function testEntityIsValidAfterCreation()
+    public function testIsEntityValidAfterCreation()
     {
         $this->assertInstanceOf(UuidInterface::class, $this->day->getId());
         $this->assertSame('Monday', $this->day->getName());

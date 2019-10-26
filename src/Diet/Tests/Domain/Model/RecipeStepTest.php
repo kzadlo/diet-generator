@@ -17,7 +17,7 @@ class RecipeStepTest extends TestCase
         $this->recipeStep = new RecipeStep('Recipe description', 1);
     }
 
-    public function testEntityIsValidAfterCreation()
+    public function testIsEntityValidAfterCreation()
     {
         $this->assertInstanceOf(UuidInterface::class, $this->recipeStep->getId());
         $this->assertSame(1, $this->recipeStep->order());

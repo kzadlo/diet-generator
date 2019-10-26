@@ -17,7 +17,7 @@ class ProductTest extends TestCase
         $this->product = new Product('Product Name');
     }
 
-    public function testEntityIsValidAfterCreation()
+    public function testIsEntityValidAfterCreation()
     {
         $this->assertInstanceOf(UuidInterface::class, $this->product->getId());
         $this->assertSame('Product Name', $this->product->getName());

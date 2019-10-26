@@ -18,7 +18,7 @@ class DietPlanTest extends TestCase
         $this->dietPlan = new DietPlan(new DietType('Diet Type Name'));
     }
 
-    public function testEntityIsValidAfterCreation()
+    public function testIsEntityValidAfterCreation()
     {
         $this->assertInstanceOf(UuidInterface::class, $this->dietPlan->getId());
         $this->assertInstanceOf(DietType::class, $this->dietPlan->getType());
