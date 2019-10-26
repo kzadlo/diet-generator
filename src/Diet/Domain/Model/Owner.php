@@ -104,4 +104,14 @@ class Owner
         $this->lastName = $lastName;
         return $this;
     }
+
+    public function getHeight(): int
+    {
+        return $this->bodyMeasurement->getHeight();
+    }
+
+    public function getWeight(): float
+    {
+        return $this->bodyMeasurement->getKiloWeight();
+    }
 }

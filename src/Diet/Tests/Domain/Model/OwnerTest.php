@@ -66,4 +66,14 @@ class OwnerTest extends TestCase
         $this->owner->setLastName('Last');
         $this->assertSame('Last', $this->owner->getLastName());
     }
+
+    public function testCanGeHeight()
+    {
+        $this->assertSame(180, $this->owner->getHeight());
+    }
+
+    public function testCanGetWeight()
+    {
+        $this->assertSame(90.5, $this->owner->getWeight());
+    }
 }
