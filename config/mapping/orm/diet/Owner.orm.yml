@@ -9,6 +9,9 @@ App\Diet\Domain\Model\Owner:
     email:
       column: email
       type: string
+    sex:
+      column: sex
+      type: integer
     firstName:
       column: first_name
       type: string

@@ -17,6 +17,7 @@ class OwnerTest extends TestCase
     {
         $this->owner = new Owner(
             'test@email.com',
+            Owner::SEX_MALE,
             new \DateTime('1995-06-19'),
             new BodyMeasurement(180, 90.5)
         );
@@ -26,6 +27,7 @@ class OwnerTest extends TestCase
     {
         $this->assertInstanceOf(UuidInterface::class, $this->owner->getId());
         $this->assertSame('test@email.com', $this->owner->getEmail());
+        $this->assertFalse($this->owner->isFemale());
         $this->assertInstanceOf(\DateTimeInterface::class, $this->owner->getBirthDate());
         $this->assertInstanceOf(BodyMeasurement::class, $this->owner->getBodyMeasurement());
     }

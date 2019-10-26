@@ -9,6 +9,9 @@ use Ramsey\Uuid\UuidInterface;
 
 class Owner
 {
+    public const SEX_MALE = 0;
+    public const SEX_FEMALE = 1;
+
     private $id;
 
     private $email;
@@ -17,14 +20,21 @@ class Owner
 
     private $lastName;
 
+    private $sex;
+
     private $birthDate;
 
     private $bodyMeasurement;
 
-    public function __construct(string $email, \DateTime $birthDate, BodyMeasurement $bodyMeasurement)
-    {
+    public function __construct(
+        string $email,
+        int $sex,
+        \DateTime $birthDate,
+        BodyMeasurement $bodyMeasurement
+    ) {
         $this->id = Uuid::uuid4();
         $this->email = $email;
+        $this->sex = $sex;
         $this->birthDate = $birthDate;
         $this->bodyMeasurement = $bodyMeasurement;
     }
@@ -43,6 +53,11 @@ class Owner
     {
         $this->email = $email;
         return $this;
+    }
+
+    public function isFemale(): bool
+    {
+        return $this->sex === self::SEX_FEMALE;
     }
 
     public function getBodyMeasurement(): BodyMeasurement
