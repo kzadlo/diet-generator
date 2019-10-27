@@ -9,3 +9,10 @@ App\Diet\Domain\Model\Product:
     name:
       column: name
       type: string
+  manyToOne:
+    productType:
+      targetEntity: App\Diet\Domain\Model\ProductType
+      inversedBy: products
+      joinColumn:
+        name: product_type_id
+        referencedColumnName: id

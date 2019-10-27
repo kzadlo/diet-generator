@@ -20,7 +20,7 @@ class DietPlan
     public function __construct(DietType $dietType)
     {
         $this->id = Uuid::uuid4();
-        $this->dietType = $dietType;
+        $this->changeType($dietType);
         $this->daysQuantity = self::STANDARD_QUANTITY_DAYS;
     }
 
@@ -37,6 +37,7 @@ class DietPlan
     public function changeType(DietType $dietType): DietPlan
     {
         $this->dietType = $dietType;
+        $dietType->addDietPlan($this);
         return $this;
     }
 

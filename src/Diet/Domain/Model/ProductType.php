@@ -9,7 +9,7 @@ use Doctrine\Common\Collections\Collection;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
-class DietType
+class ProductType
 {
     private $id;
 
@@ -17,13 +17,13 @@ class DietType
 
     private $description;
 
-    private $dietPlans;
+    private $products;
 
     public function __construct(string $name)
     {
         $this->id = Uuid::uuid4();
         $this->name = $name;
-        $this->dietPlans = new ArrayCollection();
+        $this->products = new ArrayCollection();
     }
 
     public function getId(): UuidInterface
@@ -36,19 +36,19 @@ class DietType
         return $this->name;
     }
 
-    public function changeName(string $name): DietType
+    public function changeName(string $name): ProductType
     {
         $this->name = $name;
         return $this;
     }
 
-    public function addDescription(string $description): DietType
+    public function addDescription(string $description): ProductType
     {
         $this->description = $description;
         return $this;
     }
 
-    public function removeDescription(): DietType
+    public function removeDescription(): ProductType
     {
         $this->description = null;
         return $this;
@@ -68,28 +68,28 @@ class DietType
         return $this->description !== null;
     }
 
-    public function getDietPlans(): Collection
+    public function getProducts(): Collection
     {
-        return $this->dietPlans;
+        return $this->products;
     }
 
-    public function addDietPlan(DietPlan $dietPlan): DietType
+    public function addProduct(Product $product): ProductType
     {
-        if (!$this->dietPlans->contains($dietPlan)) {
-            $this->dietPlans->add($dietPlan);
-            $dietPlan->changeType($this);
+        if (!$this->products->contains($product)) {
+            $this->products->add($product);
+            $product->setProductType($this);
         }
         return $this;
     }
 
-    public function countDietPlans(): int
+    public function countProducts(): int
     {
-        return $this->dietPlans->count();
+        return $this->products->count();
     }
 
-    public function clearDietPlans(): DietType
+    public function clearProducts(): ProductType
     {
-        $this->dietPlans->clear();
+        $this->products->clear();
         return $this;
     }
 }

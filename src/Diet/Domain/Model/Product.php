@@ -13,6 +13,8 @@ class Product
 
     private $name;
 
+    private $productType;
+
     public function __construct(string $name)
     {
         $this->id = Uuid::uuid4();
@@ -32,6 +34,17 @@ class Product
     public function changeName(string $name): Product
     {
         $this->name = $name;
+        return $this;
+    }
+
+    public function getProductType(): ?ProductType
+    {
+        return $this->productType;
+    }
+
+    public function setProductType(ProductType $productType): Product
+    {
+        $this->productType = $productType;
         return $this;
     }
 }

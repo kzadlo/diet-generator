@@ -13,3 +13,7 @@ App\Diet\Domain\Model\MealType:
       column: description
       type: string
       nullable: true
+  oneToMany:
+    meals:
+      targetEntity: App\Diet\Domain\Model\Meal
+      mappedBy: mealType

@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Tests\Domain\Model;
 
+use App\Diet\Domain\Model\DietPlan;
 use App\Diet\Domain\Model\DietType;
+use Doctrine\Common\Collections\Collection;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\UuidInterface;
 
@@ -21,6 +23,8 @@ class DietTypeTest extends TestCase
     {
         $this->assertInstanceOf(UuidInterface::class, $this->dietType->getId());
         $this->assertSame('Diet Type Name', $this->dietType->getName());
+        $this->assertInstanceOf(Collection::class, $this->dietType->getDietPlans());
+        $this->assertEmpty($this->dietType->getDietPlans());
     }
 
     public function testCanChangeName()
@@ -43,5 +47,31 @@ class DietTypeTest extends TestCase
         $this->dietType->removeDescription();
         $this->expectException(\BadMethodCallException::class);
         $this->dietType->getDescription();
+    }
+
+    public function testCanAddDietPlan()
+    {
+        $dietPlan = new DietPlan(new DietType('Name'));
+        $this->dietType->addDietPlan($dietPlan);
+        $this->assertEquals(1, $this->dietType->countDietPlans());
+        $this->assertSame($dietPlan->getType(), $this->dietType);
+    }
+
+    public function testCannotAddSameDietPlan()
+    {
+        $dietPlan = new DietPlan(new DietType('Name'));
+        $this->dietType->addDietPlan($dietPlan);
+        $this->dietType->addDietPlan($dietPlan);
+        $this->assertEquals(1, $this->dietType->countDietPlans());
+    }
+
+    public function testCanClearDietPlans()
+    {
+        $this->dietType->addDietPlan(new DietPlan(new DietType('Name')));
+        $this->dietType->addDietPlan(new DietPlan(new DietType('Name 2')));
+        $this->assertEquals(2, $this->dietType->countDietPlans());
+
+        $this->dietType->clearDietPlans();
+        $this->assertEmpty($this->dietType->getDietPlans());
     }
 }

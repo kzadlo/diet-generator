@@ -9,9 +9,10 @@ App\Diet\Domain\Model\DietPlan:
     daysQuantity:
       column: days_quantity
       type: integer
-  oneToOne:
+  manyToOne:
     dietType:
       targetEntity: App\Diet\Domain\Model\DietType
+      inversedBy: dietPlans
       joinColumn:
         name: diet_type_id
         referencedColumnName: id

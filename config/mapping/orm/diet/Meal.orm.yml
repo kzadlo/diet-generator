@@ -13,11 +13,6 @@ App\Diet\Domain\Model\Meal:
       column: calories_quantity
       type: integer
   oneToOne:
-    mealType:
-      targetEntity: App\Diet\Domain\Model\MealType
-      joinColumn:
-        name: meal_type_id
-        referencedColumnName: id
     recipe:
       targetEntity: App\Diet\Domain\Model\Recipe
       joinColumn:
@@ -29,6 +24,12 @@ App\Diet\Domain\Model\Meal:
       inversedBy: meals
       joinColumn:
         name: day_id
+        referencedColumnName: id
+    mealType:
+      targetEntity: App\Diet\Domain\Model\MealType
+      inversedBy: meals
+      joinColumn:
+        name: meal_type_id
         referencedColumnName: id
   oneToMany:
     ingredients:

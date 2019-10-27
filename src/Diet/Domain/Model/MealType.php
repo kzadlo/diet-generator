@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Diet\Domain\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
@@ -15,10 +17,13 @@ class MealType
 
     private $description;
 
+    private $meals;
+
     public function __construct(string $name)
     {
         $this->id = Uuid::uuid4();
         $this->name = $name;
+        $this->meals = new ArrayCollection();
     }
 
     public function getId(): UuidInterface
@@ -61,5 +66,30 @@ class MealType
     public function hasDescription(): bool
     {
         return $this->description !== null;
+    }
+
+    public function getMeals(): Collection
+    {
+        return $this->meals;
+    }
+
+    public function addMeal(Meal $product): MealType
+    {
+        if (!$this->meals->contains($product)) {
+            $this->meals->add($product);
+            $product->setMealType($this);
+        }
+        return $this;
+    }
+
+    public function countMeals(): int
+    {
+        return $this->meals->count();
+    }
+
+    public function clearMeals(): MealType
+    {
+        $this->meals->clear();
+        return $this;
     }
 }

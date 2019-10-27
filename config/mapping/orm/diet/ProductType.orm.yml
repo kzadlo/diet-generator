@@ -1,6 +1,6 @@
-App\Diet\Domain\Model\DietType:
+App\Diet\Domain\Model\ProductType:
   type: entity
-  table: diet_type
+  table: product_type
   id:
     id:
       type: uuid
@@ -14,6 +14,6 @@ App\Diet\Domain\Model\DietType:
       type: string
       nullable: true
   oneToMany:
-    dietPlans:
-      targetEntity: App\Diet\Domain\Model\DietPlan
-      mappedBy: dietType
+    products:
+      targetEntity: App\Diet\Domain\Model\Product
+      mappedBy: productType
