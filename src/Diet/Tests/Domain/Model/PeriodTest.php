@@ -18,11 +18,9 @@ class PeriodTest extends TestCase
 
     protected function setUp()
     {
-        $this->period = new Period(
-            new DietPlan(
-                new DietType('Diet Name')
-            )
-        );
+        /** @var DietPlan $dietPlan */
+        $dietPlan = $this->createMock(DietPlan::class);
+        $this->period = new Period($dietPlan);
     }
 
     public function testIsEntityValidAfterCreation()
@@ -35,7 +33,8 @@ class PeriodTest extends TestCase
 
     public function testCanChangeDietPlan()
     {
-        $dietPlan = new DietPlan(new DietType('Diet Name'));
+        /** @var DietPlan $dietPlan */
+        $dietPlan = $this->createMock(DietPlan::class);
         $this->period->changeDietPlan($dietPlan);
         $this->assertSame($dietPlan, $this->period->getDietPlan());
     }

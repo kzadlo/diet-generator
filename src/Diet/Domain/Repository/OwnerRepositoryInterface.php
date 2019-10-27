@@ -11,4 +11,6 @@ interface OwnerRepositoryInterface
     public function save(Owner $owner): void;
 
     public function remove(Owner $owner): void;
+
+    public function findOneByEmail(string $email): ?Owner;
 }

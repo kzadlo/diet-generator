@@ -15,12 +15,15 @@ class DietPlan
 
     private $dietType;
 
+    private $owner;
+
     private $daysQuantity;
 
-    public function __construct(DietType $dietType)
+    public function __construct(DietType $dietType, Owner $owner)
     {
         $this->id = Uuid::uuid4();
         $this->changeType($dietType);
+        $this->owner = $owner;
         $this->daysQuantity = self::STANDARD_QUANTITY_DAYS;
     }
 
@@ -50,5 +53,10 @@ class DietPlan
     {
         $this->daysQuantity = $daysQuantity;
         return $this;
+    }
+
+    public function getOwner(): Owner
+    {
+        return $this->owner;
     }
 }

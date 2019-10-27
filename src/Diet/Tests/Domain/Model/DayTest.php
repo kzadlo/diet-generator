@@ -6,7 +6,6 @@ namespace App\Diet\Tests\Domain\Model;
 
 use App\Diet\Domain\Model\Day;
 use App\Diet\Domain\Model\DietPlan;
-use App\Diet\Domain\Model\DietType;
 use App\Diet\Domain\Model\Meal;
 use App\Diet\Domain\Model\Period;
 use App\Diet\Domain\ValueObject\Calorie;
@@ -47,11 +46,9 @@ class DayTest extends TestCase
 
     public function testCanSetPeriod()
     {
-        $period = new Period(
-            new DietPlan(
-                new DietType('Diet Name')
-            )
-        );
+        /** @var DietPlan $dietPlan */
+        $dietPlan = $this->createMock(DietPlan::class);
+        $period = new Period($dietPlan);
         $this->day->setPeriod($period);
         $this->assertSame($period, $this->day->getPeriod());
     }

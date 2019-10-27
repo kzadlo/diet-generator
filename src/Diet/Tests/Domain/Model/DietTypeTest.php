@@ -51,7 +51,11 @@ class DietTypeTest extends TestCase
 
     public function testCanAddDietPlan()
     {
-        $dietPlan = new DietPlan(new DietType('Name'));
+        /** @var DietPlan $dietPlan */
+        $dietPlan = $this->createMock(DietPlan::class);
+        $dietPlan
+            ->method('getType')
+            ->willReturn($this->dietType);
         $this->dietType->addDietPlan($dietPlan);
         $this->assertEquals(1, $this->dietType->countDietPlans());
         $this->assertSame($dietPlan->getType(), $this->dietType);
@@ -59,7 +63,8 @@ class DietTypeTest extends TestCase
 
     public function testCannotAddSameDietPlan()
     {
-        $dietPlan = new DietPlan(new DietType('Name'));
+        /** @var DietPlan $dietPlan */
+        $dietPlan = $this->createMock(DietPlan::class);
         $this->dietType->addDietPlan($dietPlan);
         $this->dietType->addDietPlan($dietPlan);
         $this->assertEquals(1, $this->dietType->countDietPlans());
@@ -67,8 +72,12 @@ class DietTypeTest extends TestCase
 
     public function testCanClearDietPlans()
     {
-        $this->dietType->addDietPlan(new DietPlan(new DietType('Name')));
-        $this->dietType->addDietPlan(new DietPlan(new DietType('Name 2')));
+        /** @var DietPlan $dietPlan1 */
+        $dietPlan1 = $this->createMock(DietPlan::class);
+        $this->dietType->addDietPlan($dietPlan1);
+        /** @var DietPlan $dietPlan2 */
+        $dietPlan2 = $this->createMock(DietPlan::class);
+        $this->dietType->addDietPlan($dietPlan2);
         $this->assertEquals(2, $this->dietType->countDietPlans());
 
         $this->dietType->clearDietPlans();

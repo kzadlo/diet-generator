@@ -16,3 +16,9 @@ App\Diet\Domain\Model\DietPlan:
       joinColumn:
         name: diet_type_id
         referencedColumnName: id
+  oneToOne:
+    owner:
+      targetEntity: App\Diet\Domain\Model\Owner
+      joinColumn:
+        name: owner_id
+        referencedColumnName: id

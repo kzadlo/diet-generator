@@ -28,4 +28,16 @@ final class OwnerRepository implements OwnerRepositoryInterface
         $this->entityManager->remove($owner);
         $this->entityManager->flush();
     }
+
+    public function findOneByEmail(string $email): ?Owner
+    {
+        return $this->entityManager
+            ->createQueryBuilder()
+            ->select('o')
+            ->from(Owner::class, 'o')
+            ->where('o.email = :email')
+            ->setParameter('email', $email)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 }

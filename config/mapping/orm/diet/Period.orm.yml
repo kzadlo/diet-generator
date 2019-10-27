@@ -16,3 +16,4 @@ App\Diet\Domain\Model\Period:
       targetEntity: App\Diet\Domain\Model\Day
       mappedBy: period
       orphanRemoval: true
+      cascade: ["persist"]
