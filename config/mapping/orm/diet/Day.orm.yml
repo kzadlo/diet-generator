@@ -19,7 +19,14 @@ App\Diet\Domain\Model\Day:
       joinColumn:
         name: period_id
         referencedColumnName: id
-  oneToMany:
+  manyToMany:
     meals:
       targetEntity: App\Diet\Domain\Model\Meal
-      mappedBy: day
+      joinTable:
+        name: meal_to_day
+        joinColumns:
+          day_id:
+            referencedColumnName: id
+        inverseJoinColumns:
+          meal_id:
+            referencedColumnName: id

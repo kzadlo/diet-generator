@@ -58,7 +58,6 @@ class DayTest extends TestCase
         $meal = new Meal('Meal Name', new Calorie(200));
         $this->day->addMeal($meal);
         $this->assertEquals(1, $this->day->countMeals());
-        $this->assertSame($meal->getDay(), $this->day);
     }
 
     public function testCannotAddSameMeal()

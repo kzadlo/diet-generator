@@ -19,12 +19,6 @@ App\Diet\Domain\Model\Meal:
         name: recipe_id
         referencedColumnName: id
   manyToOne:
-    day:
-      targetEntity: App\Diet\Domain\Model\Day
-      inversedBy: meals
-      joinColumn:
-        name: day_id
-        referencedColumnName: id
     mealType:
       targetEntity: App\Diet\Domain\Model\MealType
       inversedBy: meals

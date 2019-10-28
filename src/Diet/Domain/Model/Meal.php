@@ -24,8 +24,6 @@ class Meal
 
     private $caloriesQuantity;
 
-    private $day;
-
     public function __construct(string $name, Calorie $calorie)
     {
         $this->id = Uuid::uuid4();
@@ -105,17 +103,6 @@ class Meal
     public function deleteRecipe(): Meal
     {
         $this->recipe = null;
-        return $this;
-    }
-
-    public function getDay(): ?Day
-    {
-        return $this->day;
-    }
-
-    public function setDay(?Day $day): Meal
-    {
-        $this->day = $day;
         return $this;
     }
 }

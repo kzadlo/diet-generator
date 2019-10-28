@@ -76,7 +76,6 @@ class Day
     {
         if (!$this->meals->contains($meal)) {
             $this->meals->add($meal);
-            $meal->setDay($this);
         }
         return $this;
     }

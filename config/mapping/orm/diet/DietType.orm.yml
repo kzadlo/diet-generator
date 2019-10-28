@@ -13,6 +13,9 @@ App\Diet\Domain\Model\DietType:
       column: description
       type: string
       nullable: true
+    mealsQuantity:
+      column: meals_quantity
+      type: integer
   oneToMany:
     dietPlans:
       targetEntity: App\Diet\Domain\Model\DietPlan
