@@ -20,6 +20,16 @@ final class Calorie
         return $this->quantity;
     }
 
+    public function getMax(): int
+    {
+        return $this->quantity + self::RANGE_SIZE;
+    }
+
+    public function getMin(): int
+    {
+        return $this->quantity - self::RANGE_SIZE;
+    }
+
     public function isInRange(int $caloriesQuantity): bool
     {
         return $this->quantity >= ($caloriesQuantity - self::RANGE_SIZE)

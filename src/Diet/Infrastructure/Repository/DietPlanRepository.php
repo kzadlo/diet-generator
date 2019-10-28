@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Diet\Infrastructure\Repository;
 
 use App\Diet\Domain\Model\DietPlan;
+use App\Diet\Domain\Model\Owner;
 use App\Diet\Domain\Repository\DietPlanRepositoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -27,5 +28,17 @@ final class DietPlanRepository implements DietPlanRepositoryInterface
     {
         $this->entityManager->remove($dietPlan);
         $this->entityManager->flush();
+    }
+
+    public function findForOwner(Owner $owner): ?DietPlan
+    {
+        return $this->entityManager
+            ->createQueryBuilder()
+            ->select('dp')
+            ->from(DietPlan::class, 'dp')
+            ->where('dp.owner = :owner')
+            ->setParameter('owner', $owner)
+            ->getQuery()
+            ->getOneOrNullResult();
     }
 }

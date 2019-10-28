@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Diet\Tests\Domain\Service;
 
 use App\Diet\Domain\Model\BodyMeasurement;
+use App\Diet\Domain\Model\DietType;
 use App\Diet\Domain\Model\Owner;
 use App\Diet\Domain\Service\CalorieCalculator;
 use PHPUnit\Framework\TestCase;
@@ -18,6 +19,41 @@ class CalorieCalculatorTest extends TestCase
         $this->calorieCalculator = new CalorieCalculator();
     }
 
+    public function calculatePermissibleMealCalories()
+    {
+        $owner = new Owner(
+            'test@email.pl',
+            Owner::SEX_MALE,
+            (new \DateTime())->modify('-20 years'),
+            new BodyMeasurement(173, 70, CalorieCalculator::ACTIVITY_LACK)
+        );
+        $this->assertEquals(
+            528,
+            ($this->calorieCalculator->calculatePermissibleMealCalories($owner, new DietType('name'), 1))
+                ->getQuantity()
+        );
+        $this->assertEquals(
+            317,
+            ($this->calorieCalculator->calculatePermissibleMealCalories($owner, new DietType('name'), 2))
+                ->getQuantity()
+        );
+        $this->assertEquals(
+            633,
+            ($this->calorieCalculator->calculatePermissibleMealCalories($owner, new DietType('name'), 3))
+                ->getQuantity()
+        );
+        $this->assertEquals(
+            211,
+            ($this->calorieCalculator->calculatePermissibleMealCalories($owner, new DietType('name'), 4))
+                ->getQuantity()
+        );
+        $this->assertEquals(
+            422,
+            ($this->calorieCalculator->calculatePermissibleMealCalories($owner, new DietType('name'), 5))
+                ->getQuantity()
+        );
+    }
+
     /** @dataProvider provider */
     public function testCanCalculateTotalMetabolicRate($sex, $age, $height, $weight, $activity, $calories)
     {
@@ -27,8 +63,7 @@ class CalorieCalculatorTest extends TestCase
             (new \DateTime())->modify($age),
             new BodyMeasurement($height, $weight, $activity)
         );
-
-        $this->assertEquals($calories, $this->calorieCalculator->calculateTotalMetabolicRate($owner));
+        $this->assertEquals($calories, ($this->calorieCalculator->calculateTotalMetabolicRate($owner))->getQuantity());
     }
 
     public function provider()

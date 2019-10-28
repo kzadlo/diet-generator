@@ -25,6 +25,7 @@ class DietTypeTest extends TestCase
         $this->assertSame('Diet Type Name', $this->dietType->getName());
         $this->assertInstanceOf(Collection::class, $this->dietType->getDietPlans());
         $this->assertEmpty($this->dietType->getDietPlans());
+        $this->assertSame(DietType::MEALS_QUANTITY_FIVE, $this->dietType->getMealsQuantity());
     }
 
     public function testCanChangeName()
@@ -82,5 +83,19 @@ class DietTypeTest extends TestCase
 
         $this->dietType->clearDietPlans();
         $this->assertEmpty($this->dietType->getDietPlans());
+    }
+
+    public function testCanChangeMealsQuantity()
+    {
+        $this->dietType->applyFourMealsPerDay();
+        $this->assertSame(DietType::MEALS_QUANTITY_FOUR, $this->dietType->getMealsQuantity());
+    }
+
+    public function testCanGetCaloriePerDayRates()
+    {
+        $this->assertCount(DietType::MEALS_QUANTITY_FIVE, $this->dietType->getCaloriePerDayRates());
+
+        $this->dietType->applyFourMealsPerDay();
+        $this->assertCount(DietType::MEALS_QUANTITY_FOUR, $this->dietType->getCaloriePerDayRates());
     }
 }
