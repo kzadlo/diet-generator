@@ -58,7 +58,7 @@ class GenerateDietHandler
             $date = (new \DateTime($generateDietCommand->getStartDate()))->modify('+' . $dayNumber . ' days');
             $day = new Day($date->format('D'), $date);
 
-            for ($mealNumber = 1; $mealNumber < $dietPlan->getType()->getMealsQuantity(); $mealNumber++) {
+            for ($mealNumber = 1; $mealNumber <= $dietPlan->getType()->getMealsQuantity(); $mealNumber++) {
                 $mealCalorie = $this->calorieCalculator
                     ->calculatePermissibleMealCalories($owner, $dietPlan->getType(), $mealNumber);
                 $meal = $this->mealRepository->findRandomInCalorieRange($mealCalorie);

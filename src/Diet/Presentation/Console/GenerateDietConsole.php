@@ -40,13 +40,14 @@ class GenerateDietConsole extends Command
             $input->getArgument('startDate')
         );
 
+        $output->writeln([
+            'Generating diet...',
+        ]);
+
         $this->commandBus->dispatch($generateDietCommand);
 
-        /** @todo implment diet generator */
         $output->writeln([
-            'Generating diet.',
-            '...',
-            'Diet was prepared. Thank you!',
+           'Done. Enjoy your meals!'
         ]);
     }
 }
