@@ -11,3 +11,6 @@ services:
 
     App\Diet\Application\Command\GenerateDietHandler:
         public: true
+
+    App\Diet\Application\Query\GetPeriodDietExecutor:
+        public: true
