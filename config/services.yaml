@@ -14,3 +14,9 @@ services:
 
     App\Diet\Application\Query\GetPeriodDietExecutor:
         public: true
+
+    App\Diet\Application\Query\GetPeriodMealRecipeExecutor:
+        public: true
+
+    App\Diet\Application\Query\GetPeriodMealIngredientExecutor:
+        public: true

@@ -5,7 +5,10 @@ declare(strict_types=1);
 namespace App\Diet\Presentation\Console;
 
 use App\Diet\Application\Query\GetPeriodDiet;
+use App\Diet\Application\Query\GetPeriodMealIngredient;
+use App\Diet\Application\Query\GetPeriodMealRecipe;
 use App\Diet\Application\QueryBus;
+use App\Diet\Application\Service\DietPdfGenerator;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -17,9 +20,12 @@ class PrepareDietPdfConsole extends Command
 
     private $queryBus;
 
-    public function __construct(QueryBus $queryBus)
+    private $dietPdfGenerator;
+
+    public function __construct(QueryBus $queryBus, DietPdfGenerator $dietPdfGenerator)
     {
         $this->queryBus = $queryBus;
+        $this->dietPdfGenerator = $dietPdfGenerator;
 
         parent::__construct();
     }
@@ -34,15 +40,20 @@ class PrepareDietPdfConsole extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $getPeriodDiet = new GetPeriodDiet(
-            $input->getArgument('periodId')
-        );
-
         $output->writeln([
             'Preparing pdf...',
         ]);
 
+        $getPeriodDiet = new GetPeriodDiet($input->getArgument('periodId'));
         $periodMeals = $this->queryBus->dispatch($getPeriodDiet);
+
+        $getPeriodMealRecipe = new GetPeriodMealRecipe($input->getArgument('periodId'));
+        $periodRecipes = $this->queryBus->dispatch($getPeriodMealRecipe);
+
+        $getPeriodMealIngredient = new GetPeriodMealIngredient($input->getArgument('periodId'));
+        $periodIngredients = $this->queryBus->dispatch($getPeriodMealIngredient);
+
+        $this->dietPdfGenerator->generate($periodMeals, $periodRecipes, $periodIngredients);
 
         $output->writeln([
             'Done. Enjoy your meals!'
