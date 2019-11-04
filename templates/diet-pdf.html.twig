@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Diet Menu PDF</title>
+    <link type="text/css" rel="stylesheet" href="{{ public_path }}{{ asset('css/pdf.css') }}" />
+</head>
+<body>
+    <div class="container">
+        <div class="diet-title-box">
+            <h1 class="diet-title">Jadłospis</h1>
+            <span class="date-range">
+                <span class="color-element">(</span>
+                {{ periodMeals|first.date }} - {{ periodMeals|last.date }}
+                <span class="color-element">)</span>
+            </span>
+        </div>
+        <div class="content">
+            {% for day in periodMeals %}
+                <div class="{{ loop.first ? '' : 'new-page' }} day-box">
+                    <h2 class="day-title">
+                        {{ day.dayName }}
+                        <span class="date-range">
+                            <span class="color-element">(</span>
+                                {{ day.date }}
+                            <span class="color-element">)</span>
+                        </span>
+                    </h2>
+                    {% for meal in day.meals %}
+                        <div class="meal-box">
+                            <h3 class="meal-title">{{ meal.mealName }}</h3>
+                            <i class="arrow right"></i>
+                            {{ meal.caloriesQuantity }} kcal
+                            <div class="content-box">
+                                {% if meal.mealId in periodIngredients|keys %}
+                                    <span class="color-element content-title">Składniki</span>
+                                    <div class="content-text">
+                                        {% for mealIngredients in periodIngredients[meal.mealId] %}
+                                            <span>{{ mealIngredients.weight }}g {{ mealIngredients.name }}{{ loop.last ? '' : ', ' }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <div class="content-box">
+                                {% if meal.mealId in periodRecipes|keys %}
+                                    <span class="color-element content-title">Sposób przygotowania</span>
+                                    <div class="content-text">
+                                        <ul class="recipe-list">
+                                            {% for order,step in periodRecipes[meal.mealId] %}
+                                                <li><i class="arrow right"></i> {{ step }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

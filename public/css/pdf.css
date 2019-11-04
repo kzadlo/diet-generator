@@ -1,0 +1,125 @@
+body {
+    font-family: 'Helvetica', sans-serif;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    font-size: 34px;
+}
+
+h2 {
+    font-size: 30px;
+}
+
+h3 {
+    font-size: 24px;
+}
+
+i.arrow {
+    border: solid #3cc;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+}
+
+.right {
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+}
+
+.left {
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+}
+
+.up {
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+}
+
+.down {
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
+
+.new-page {
+    page-break-before: always;
+}
+
+span.color-element {
+    color: #3cc;
+}
+
+span.date-range {
+    font-style: italic;
+    font-size: 18px;
+    font-weight: lighter;
+}
+
+div.container {
+    margin: 10px 160px;
+    padding: 10px 0;
+    width: 60%;
+}
+
+div.diet-title-box {
+    text-align: center;
+    width: 100%;
+    padding: 20px;
+    margin: 0 auto;
+    border-bottom: 2px solid #3cc;
+}
+
+div.day-box {
+    padding-top: 40px;
+}
+
+div.meal-box {
+    page-break-inside: avoid !important;
+    margin: 0 10px;
+}
+
+div.content-box {
+    padding: 10px;
+    margin: 10px 0;
+}
+
+.diet-title {
+    margin: 0;
+    padding: 0;
+}
+
+.day-title {
+    margin: 0;
+    padding: 0 10px;
+    border-left: 4px solid #3cc;
+}
+
+.meal-title {
+    margin: 0;
+    padding: 10px;
+}
+
+.content-title {
+    padding: 0 10px;
+    font-size: 18px;
+    border-left: 2px solid #333;
+}
+
+.content-text {
+    padding: 10px;
+    margin: 0;
+}
+
+ul.recipe-list {
+    margin: 0;
+    padding: 6px;
+    list-style: none;
+}
+
+ul.recipe-list li {
+    margin: 0;
+    padding: 0;
+}

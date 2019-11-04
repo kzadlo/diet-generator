@@ -126,6 +126,9 @@
             "config/packages/ramsey_uuid_doctrine.yaml"
         ]
     },
+    "symfony/asset": {
+        "version": "v4.3.6"
+    },
     "symfony/cache": {
         "version": "v4.3.5"
     },

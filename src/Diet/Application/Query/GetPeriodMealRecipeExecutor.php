@@ -30,6 +30,7 @@ class GetPeriodMealRecipeExecutor
             ->join('r', 'recipe_step', 'rs', 'r.id = rs.recipe_id')
             ->where('d.period_id = :periodId')
             ->groupBy('rs.id')
+            ->orderBy('rs.order')
             ->setParameter('periodId', $getPeriodMealRecipeQuery->getPeriodId());
 
         $data = $this->connection->fetchAll($queryBuilder->getSQL(), $queryBuilder->getParameters());
@@ -37,10 +38,6 @@ class GetPeriodMealRecipeExecutor
         $periodRecipes = [];
         foreach ($data as $key => $value) {
             $periodRecipes[$value['meal_id']][$value['order']] = $value['description'];
-        }
-
-        foreach ($periodRecipes as &$periodRecipe) {
-            ksort($periodRecipe);
         }
 
         return $periodRecipes;

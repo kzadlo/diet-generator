@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Diet\Application\Query;
 
+use App\Diet\Application\Service\DayNameTranslator;
 use Doctrine\DBAL\Connection;
 
 class GetPeriodDietExecutor
@@ -29,24 +30,26 @@ class GetPeriodDietExecutor
             ->join('d', 'meal_to_day', 'mtd', 'd.id = day_id')
             ->join('mtd', 'meal', 'm', 'mtd.meal_id = m.id')
             ->where('d.period_id = :periodId')
+            ->orderBy('d.date')
             ->setParameter('periodId', $getPeriodDietQuery->getPeriodId());
 
         $data = $this->connection->fetchAll($queryBuilder->getSQL(), $queryBuilder->getParameters());
 
         $periodDays = [];
-        foreach ($data as $key => $value) {
-            $periodDays[$value['date']]['dayName'] = $value['day_name'];
+        foreach ($data as $day) {
+            $periodDays[$day['date']]['dayName'] = DayNameTranslator::map($day['day_name']);
+            $periodDays[$day['date']]['date'] = $day['date'];
 
-            if (!isset($periodDays[$value['date']]['dayCalories'])) {
-                $periodDays[$value['date']]['dayCalories'] = 0;
+            if (!isset($periodDays[$day['date']]['dayCalories'])) {
+                $periodDays[$day['date']]['dayCalories'] = 0;
             }
 
-            $periodDays[$value['date']]['dayCalories'] += $value['calories_quantity'];
+            $periodDays[$day['date']]['dayCalories'] += $day['calories_quantity'];
 
-            $periodDays[$value['date']]['meals'][] = [
-                'mealId' => $value['meal_id'],
-                'mealName' => $value['meal_name'],
-                'caloriesQuantity' => $value['calories_quantity']
+            $periodDays[$day['date']]['meals'][] = [
+                'mealId' => $day['meal_id'],
+                'mealName' => $day['meal_name'],
+                'caloriesQuantity' => $day['calories_quantity']
             ];
         }
 
