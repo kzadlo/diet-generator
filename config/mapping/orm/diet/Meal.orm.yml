@@ -9,6 +9,7 @@ App\Diet\Domain\Model\Meal:
     name:
       column: name
       type: string
+      unique: true
     caloriesQuantity:
       column: calories_quantity
       type: integer

@@ -26,18 +26,6 @@ class RecipeTest extends TestCase
         $this->assertInstanceOf(Collection::class, $this->recipe->getSteps());
     }
 
-    public function testCanSetCookingTime()
-    {
-        $this->recipe->setCookingTime(10);
-        $this->assertSame(10, $this->recipe->getCookingTime());
-    }
-
-    public function testCanGetCookingTimeWithUnit()
-    {
-        $this->recipe->setCookingTime(10);
-        $this->assertSame('10 min', $this->recipe->getCookingTimeWithUnit());
-    }
-
     public function testCanAddStep()
     {
         $step = new RecipeStep('Recipe description', 1);

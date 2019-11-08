@@ -11,13 +11,9 @@ use Ramsey\Uuid\UuidInterface;
 
 class Recipe
 {
-    public const COOKING_UNIT = 'min';
-
     private $id;
 
     private $steps;
-
-    private $cookingTime;
 
     public function __construct()
     {
@@ -28,22 +24,6 @@ class Recipe
     public function getId(): UuidInterface
     {
         return $this->id;
-    }
-
-    public function getCookingTime(): int
-    {
-        return $this->cookingTime;
-    }
-
-    public function setCookingTime(int $cookingTime): Recipe
-    {
-        $this->cookingTime = $cookingTime;
-        return $this;
-    }
-
-    public function getCookingTimeWithUnit(): string
-    {
-        return $this->cookingTime . ' ' . self::COOKING_UNIT;
     }
 
     public function getSteps(): Collection

@@ -5,11 +5,6 @@ App\Diet\Domain\Model\Recipe:
     id:
       type: uuid
       unique: true
-  fields:
-    cookingTime:
-      column: cooking_time
-      type: integer
-      nullable: true
   oneToMany:
     steps:
       targetEntity: App\Diet\Domain\Model\RecipeStep

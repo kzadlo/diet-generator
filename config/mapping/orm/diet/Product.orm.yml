@@ -9,6 +9,7 @@ App\Diet\Domain\Model\Product:
     name:
       column: name
       type: string
+      unique: true
   manyToOne:
     productType:
       targetEntity: App\Diet\Domain\Model\ProductType
