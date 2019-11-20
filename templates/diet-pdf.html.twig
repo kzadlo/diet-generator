@@ -28,26 +28,37 @@
                     </h2>
                     {% for meal in day.meals %}
                         <div class="meal-box">
-                            <h3 class="meal-title">{{ meal.mealName }}</h3>
-                            <i class="arrow right"></i>
-                            {{ meal.caloriesQuantity }} kcal
+                            <h3 class="meal-title"><em>{{ meal.mealName }}</em></h3>
+                            <span class="calories">
+                                <img class="icon" src="{{ public_path }}{{ asset('icon/kcal.svg') }}" alt="kcal" />
+                                {{ meal.caloriesQuantity }} kcal
+                            </span>
                             <div class="content-box">
                                 {% if meal.mealId in periodIngredients|keys %}
-                                    <span class="color-element content-title">Składniki</span>
+                                    <span class="color-element content-title">
+                                        Składniki
+                                    <img class="icon" src="{{ public_path }}{{ asset('icon/ingredient.svg') }}" alt="ingredient" />
+                                    </span>
                                     <div class="content-text">
                                         {% for mealIngredients in periodIngredients[meal.mealId] %}
-                                            <span>{{ mealIngredients.weight }}g {{ mealIngredients.name }}{{ loop.last ? '' : ', ' }}</span>
+                                            <span><em>{{ mealIngredients.weight }}g</em> {{ mealIngredients.name }}{{ loop.last ? '' : ', ' }}</span>
                                         {% endfor %}
                                     </div>
                                 {% endif %}
                             </div>
                             <div class="content-box">
                                 {% if meal.mealId in periodRecipes|keys %}
-                                    <span class="color-element content-title">Sposób przygotowania</span>
+                                    <span class="color-element content-title">
+                                        Sposób przygotowania
+                                     <img class="icon" src="{{ public_path }}{{ asset('icon/menu.svg') }}" alt="menu" />
+                                    </span>
                                     <div class="content-text">
                                         <ul class="recipe-list">
                                             {% for order,step in periodRecipes[meal.mealId] %}
-                                                <li><i class="arrow right"></i> {{ step }}</li>
+                                                <li>
+                                                    <img class="icon" src="{{ public_path }}{{ asset('icon/step.svg') }}" alt="step" />
+                                                    {{ step }}
+                                                </li>
                                             {% endfor %}
                                         </ul>
                                     </div>

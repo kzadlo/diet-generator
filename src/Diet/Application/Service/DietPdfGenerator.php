@@ -33,6 +33,15 @@ class DietPdfGenerator
             ]
         );
 
-        $this->pdf->generateFromHtml($html, self::DIRECTORY_PATH . $fileName);
+        $this->pdf->generateFromHtml(
+            $html,
+            self::DIRECTORY_PATH . $fileName,
+            [
+                'margin-top' => 12,
+                'margin-bottom' => 12,
+                'margin-right' => 10,
+                'margin-left' => 10
+            ]
+        );
     }
 }

@@ -17,59 +17,33 @@ h3 {
     font-size: 24px;
 }
 
-i.arrow {
-    border: solid #3cc;
-    border-width: 0 3px 3px 0;
-    display: inline-block;
-    padding: 3px;
-}
-
-.right {
-    transform: rotate(-45deg);
-    -webkit-transform: rotate(-45deg);
-}
-
-.left {
-    transform: rotate(135deg);
-    -webkit-transform: rotate(135deg);
-}
-
-.up {
-    transform: rotate(-135deg);
-    -webkit-transform: rotate(-135deg);
-}
-
-.down {
-    transform: rotate(45deg);
-    -webkit-transform: rotate(45deg);
-}
-
 .new-page {
     page-break-before: always;
 }
 
 span.color-element {
-    color: #3cc;
+    color: #009933;
 }
 
 span.date-range {
     font-style: italic;
     font-size: 18px;
     font-weight: lighter;
+    letter-spacing: normal !important;
 }
 
 div.container {
-    margin: 10px 160px;
-    padding: 10px 0;
-    width: 60%;
+    margin: 10px auto;
+    padding: 10px auto;
+    width: 90%;
 }
 
 div.diet-title-box {
     text-align: center;
     width: 100%;
-    padding: 20px;
+    padding: 20px 0;
     margin: 0 auto;
-    border-bottom: 2px solid #3cc;
+    border-bottom: 2px solid #009933;
 }
 
 div.day-box {
@@ -78,7 +52,7 @@ div.day-box {
 
 div.meal-box {
     page-break-inside: avoid !important;
-    margin: 0 10px;
+    margin: 10px;
 }
 
 div.content-box {
@@ -89,12 +63,14 @@ div.content-box {
 .diet-title {
     margin: 0;
     padding: 0;
+    letter-spacing: 1px;
 }
 
 .day-title {
     margin: 0;
     padding: 0 10px;
-    border-left: 4px solid #3cc;
+    border-left: 4px solid #009933;
+    letter-spacing: 1px;
 }
 
 .meal-title {
@@ -111,15 +87,24 @@ div.content-box {
 .content-text {
     padding: 10px;
     margin: 0;
+    line-height: 150%;
+}
+
+span.calories {
+    padding: 10px;
 }
 
 ul.recipe-list {
     margin: 0;
-    padding: 6px;
+    padding: 10px 0;
     list-style: none;
 }
 
 ul.recipe-list li {
     margin: 0;
     padding: 0;
+}
+
+.icon {
+    vertical-align: bottom;
 }
