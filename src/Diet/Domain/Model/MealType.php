@@ -17,6 +17,8 @@ class MealType
 
     private $description;
 
+    private $order;
+
     private $meals;
 
     public function __construct(string $name)

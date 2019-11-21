@@ -12,6 +12,7 @@ App\Diet\Domain\Model\Day:
     date:
       column: date
       type: datetime
+      unique: true
   manyToOne:
     period:
       targetEntity: App\Diet\Domain\Model\Period

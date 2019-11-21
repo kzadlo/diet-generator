@@ -29,8 +29,10 @@ class GetPeriodDietExecutor
             )->from('day', 'd')
             ->join('d', 'meal_to_day', 'mtd', 'd.id = day_id')
             ->join('mtd', 'meal', 'm', 'mtd.meal_id = m.id')
+            ->join('m', 'meal_type', 'mt', 'm.meal_type_id = mt.id')
             ->where('d.period_id = :periodId')
             ->orderBy('d.date')
+            ->addOrderBy('mt.order')
             ->setParameter('periodId', $getPeriodDietQuery->getPeriodId());
 
         $data = $this->connection->fetchAll($queryBuilder->getSQL(), $queryBuilder->getParameters());
