@@ -40,11 +40,11 @@ class GetPeriodDietExecutor
             $periodDays[$day['date']]['dayName'] = DayNameTranslator::map($day['day_name']);
             $periodDays[$day['date']]['date'] = $day['date'];
 
-            if (!isset($periodDays[$day['date']]['dayCalories'])) {
-                $periodDays[$day['date']]['dayCalories'] = 0;
+            if (!isset($periodDays[$day['date']]['caloriesQuantity'])) {
+                $periodDays[$day['date']]['caloriesQuantity'] = 0;
             }
 
-            $periodDays[$day['date']]['dayCalories'] += $day['calories_quantity'];
+            $periodDays[$day['date']]['caloriesQuantity'] += $day['calories_quantity'];
 
             $periodDays[$day['date']]['meals'][] = [
                 'mealId' => $day['meal_id'],

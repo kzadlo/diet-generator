@@ -18,14 +18,19 @@
         <div class="content">
             {% for day in periodMeals %}
                 <div class="{{ loop.first ? '' : 'new-page' }} day-box">
-                    <h2 class="day-title">
-                        {{ day.dayName }}
-                        <span class="date-range">
-                            <span class="color-element">(</span>
-                                {{ day.date }}
-                            <span class="color-element">)</span>
+                    <h2 class="day-title">{{ day.dayName }}</h2>
+                    <span>
+                        <span class="color-element">(</span>
+                        <span>
+                            <img class="icon " src="{{ public_path }}{{ asset('icon/date.svg') }}" alt="date" />
+                            {{ day.date }}
                         </span>
-                    </h2>
+                        <span class="day-info">
+                        <img class="icon" src="{{ public_path }}{{ asset('icon/kcal.svg') }}" alt="kcal" />
+                            {{ day.caloriesQuantity }} kcal
+                        </span>
+                        <span class="color-element">)</span>
+                    </span>
                     {% for meal in day.meals %}
                         <div class="meal-box">
                             <h3 class="meal-title"><em>{{ meal.mealName }}</em></h3>

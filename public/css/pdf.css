@@ -57,7 +57,7 @@ div.meal-box {
 
 div.content-box {
     padding: 10px;
-    margin: 10px 0;
+    margin: 0;
 }
 
 .diet-title {
@@ -107,4 +107,10 @@ ul.recipe-list li {
 
 .icon {
     vertical-align: bottom;
+}
+
+.day-info {
+    margin-left: 5px;
+    padding-left: 5px;
+    border-left: 1px solid #009933;
 }
