@@ -75,4 +75,10 @@ class MealTypeTest extends TestCase
         $this->mealType->clearMeals();
         $this->assertEmpty($this->mealType->getMeals());
     }
+
+    public function testCanSetOrder()
+    {
+        $this->mealType->setOrder(2);
+        $this->assertSame(2, $this->mealType->order());
+    }
 }

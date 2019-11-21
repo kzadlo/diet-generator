@@ -94,4 +94,15 @@ class MealType
         $this->meals->clear();
         return $this;
     }
+
+    public function order(): int
+    {
+        return $this->order;
+    }
+
+    public function setOrder(int $order): MealType
+    {
+        $this->order = $order;
+        return $this;
+    }
 }
