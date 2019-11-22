@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Shopping List PDF</title>
+    <link type="text/css" rel="stylesheet" href="{{ public_path }}{{ asset('css/pdf.css') }}" />
+</head>
+<body>
+<div class="container">
+    <div class="diet-title-box">
+        <h1 class="diet-title">Lista zakupów</h1>
+        <span class="date-range">
+            <span class="color-element">(</span>
+                {{ startDate|date("d.m.Y") }} - {{ endDate|date("d.m.Y") }}
+            <span class="color-element">)</span>
+        </span>
+    </div>
+    <div class="content">
+        {% for productTypeName,productTypeItems in products %}
+            <div class="product-group-box">
+                <h2 class="product-group-title">{{ productTypeName }}</h2>
+                {% for product in productTypeItems %}
+                    <div class="product-box">
+                        <span>{{ product.name|capitalize }}</span>
+                        <span><em>{{ product.weight }}g</em></span>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
+</div>
+</body>
+</html>

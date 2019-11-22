@@ -20,3 +20,6 @@ services:
 
     App\Diet\Application\Query\GetPeriodMealIngredientExecutor:
         public: true
+
+    App\Diet\Application\Query\GetShoppingListProductExecutor:
+        public: true

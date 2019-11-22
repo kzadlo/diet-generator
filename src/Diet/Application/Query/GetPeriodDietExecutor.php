@@ -21,7 +21,7 @@ class GetPeriodDietExecutor
         $queryBuilder = $this->connection->createQueryBuilder();
         $queryBuilder
             ->select(
-                'DATE_FORMAT(d.date, "%d.%m.%Y") date',
+                'DATE_FORMAT(d.date, "%Y-%m-%d") date',
                 'd.name day_name',
                 'm.id meal_id',
                 'm.name meal_name',

@@ -55,6 +55,17 @@ div.meal-box {
     margin: 10px;
 }
 
+div.product-group-box {
+    padding: 0;
+    width: 46%;
+    margin: 0 2%;
+    float: left;
+}
+
+div.product-box {
+    padding: 5px;
+}
+
 div.content-box {
     padding: 10px;
     margin: 0;
@@ -82,6 +93,14 @@ div.content-box {
     padding: 0 10px;
     font-size: 18px;
     border-left: 2px solid #333;
+}
+
+.product-group-title {
+    padding: 10px 0;
+    margin: 10px 0;
+    text-align: center;
+    letter-spacing: 1px;
+    border-bottom: 1px solid #009933;
 }
 
 .content-text {

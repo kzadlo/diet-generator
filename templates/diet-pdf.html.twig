@@ -11,7 +11,7 @@
             <h1 class="diet-title">Jadłospis</h1>
             <span class="date-range">
                 <span class="color-element">(</span>
-                {{ periodMeals|first.date }} - {{ periodMeals|last.date }}
+                {{ periodMeals|first.date|date("d.m.Y") }} - {{ periodMeals|last.date|date("d.m.Y") }}
                 <span class="color-element">)</span>
             </span>
         </div>
@@ -23,7 +23,7 @@
                         <span class="color-element">(</span>
                         <span>
                             <img class="icon " src="{{ public_path }}{{ asset('icon/date.svg') }}" alt="date" />
-                            {{ day.date }}
+                            {{ day.date|date("d.m.Y") }}
                         </span>
                         <span class="day-info">
                         <img class="icon" src="{{ public_path }}{{ asset('icon/kcal.svg') }}" alt="kcal" />
