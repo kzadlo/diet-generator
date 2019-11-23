@@ -11,7 +11,7 @@ App\Diet\Domain\Model\Owner:
       type: string
     sex:
       column: sex
-      type: integer
+      type: string
     firstName:
       column: first_name
       type: string

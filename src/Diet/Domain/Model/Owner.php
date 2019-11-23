@@ -9,8 +9,8 @@ use Ramsey\Uuid\UuidInterface;
 
 class Owner
 {
-    public const SEX_MALE = 0;
-    public const SEX_FEMALE = 1;
+    public const SEX_MALE = 'male';
+    public const SEX_FEMALE = 'female';
 
     private $id;
 
@@ -28,7 +28,7 @@ class Owner
 
     public function __construct(
         string $email,
-        int $sex,
+        string $sex,
         \DateTime $birthDate,
         BodyMeasurement $bodyMeasurement
     ) {
