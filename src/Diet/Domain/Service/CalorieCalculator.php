@@ -7,6 +7,7 @@ namespace App\Diet\Domain\Service;
 use App\Diet\Domain\Model\DietType;
 use App\Diet\Domain\Model\Owner;
 use App\Diet\Domain\ValueObject\Calorie;
+use phpDocumentor\Reflection\Types\Integer;
 
 class CalorieCalculator
 {
@@ -19,12 +20,12 @@ class CalorieCalculator
     public function calculatePermissibleMealCalories(Owner $owner, DietType $dietType, int $mealNumber): Calorie
     {
         $totalCaloriesPerDay = $this->calculateTotalMetabolicRate($owner);
-        $mealCalories = (int) round($dietType->getCaloriePerDayRates()[$mealNumber] * $totalCaloriesPerDay->getQuantity());
+        $mealCalories = (int) round($dietType->getCaloriePerDayRates()[$mealNumber] * $totalCaloriesPerDay);
 
         return new Calorie($mealCalories);
     }
 
-    public function calculateTotalMetabolicRate(Owner $owner): Calorie
+    public function calculateTotalMetabolicRate(Owner $owner): int
     {
         $bmr = $owner->isFemale()
             ? $this->femaleFormula($owner->getWeight(), $owner->getHeight(), $owner->getAge())
@@ -32,7 +33,7 @@ class CalorieCalculator
 
         $totalMetabolicRate = (int) round($bmr * $owner->getActivityRate());
 
-        return new Calorie($totalMetabolicRate);
+        return $totalMetabolicRate;
     }
 
     private function femaleFormula(float $weight, int $height, int $age): float

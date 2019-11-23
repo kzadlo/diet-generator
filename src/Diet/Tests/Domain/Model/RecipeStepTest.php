@@ -8,7 +8,7 @@ use App\Diet\Domain\Model\RecipeStep;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\UuidInterface;
 
-class RecipeStepTest extends TestCase
+final class RecipeStepTest extends TestCase
 {
     private $recipeStep;
 
@@ -26,6 +26,7 @@ class RecipeStepTest extends TestCase
     public function testCanChangeOrder()
     {
         $this->recipeStep->changeOrder(2);
+
         $this->assertSame(2, $this->recipeStep->order());
     }
 }

@@ -6,20 +6,19 @@ namespace App\Diet\Tests\Domain\Model;
 
 use App\Diet\Domain\Model\Day;
 use App\Diet\Domain\Model\DietPlan;
-use App\Diet\Domain\Model\DietType;
 use App\Diet\Domain\Model\Period;
+use App\Diet\Tests\Helper\DietPlanFactory;
 use Doctrine\Common\Collections\Collection;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\UuidInterface;
 
-class PeriodTest extends TestCase
+final class PeriodTest extends TestCase
 {
     private $period;
 
     protected function setUp()
     {
-        /** @var DietPlan $dietPlan */
-        $dietPlan = $this->createMock(DietPlan::class);
+        $dietPlan = (new DietPlanFactory())->createDietPlanForTests();
         $this->period = new Period($dietPlan);
     }
 
@@ -33,35 +32,39 @@ class PeriodTest extends TestCase
 
     public function testCanChangeDietPlan()
     {
-        /** @var DietPlan $dietPlan */
-        $dietPlan = $this->createMock(DietPlan::class);
+        $dietPlan = (new DietPlanFactory())->createDietPlanForTests();
         $this->period->changeDietPlan($dietPlan);
+
         $this->assertSame($dietPlan, $this->period->getDietPlan());
     }
 
     public function testCanAddDay()
     {
-        $day = new Day('Name', new \DateTime());
+        $day = new Day('Day Name', new \DateTime());
         $this->period->addDay($day);
+
         $this->assertEquals(1, $this->period->countDays());
         $this->assertSame($day->getPeriod(), $this->period);
     }
 
     public function testCannotAddSameDay()
     {
-        $day = new Day('Name', new \DateTime());
+        $day = new Day('Day Name', new \DateTime());
         $this->period->addDay($day);
         $this->period->addDay($day);
+
         $this->assertEquals(1, $this->period->countDays());
     }
 
     public function testCanClearDays()
     {
-        $this->period->addDay(new Day('Name', new \DateTime()));
-        $this->period->addDay(new Day('Name', new \DateTime()));
+        $this->period->addDay(new Day('Day Name', new \DateTime()));
+        $this->period->addDay(new Day('Day Name', new \DateTime()));
+
         $this->assertEquals(2, $this->period->countDays());
 
         $this->period->clearDays();
+
         $this->assertEmpty($this->period->getDays());
     }
 }

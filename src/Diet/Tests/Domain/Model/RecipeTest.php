@@ -10,7 +10,7 @@ use Doctrine\Common\Collections\Collection;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\UuidInterface;
 
-class RecipeTest extends TestCase
+final class RecipeTest extends TestCase
 {
     private $recipe;
 
@@ -30,6 +30,7 @@ class RecipeTest extends TestCase
     {
         $step = new RecipeStep('Recipe description', 1);
         $this->recipe->addStep($step);
+
         $this->assertEquals(1, $this->recipe->countSteps());
         $this->assertSame($step->getRecipe(), $this->recipe);
     }
@@ -38,6 +39,7 @@ class RecipeTest extends TestCase
     {
         $this->recipe->addStep(new RecipeStep('Recipe description', 1));
         $this->recipe->addStep(new RecipeStep('Recipe description 2', 1));
+
         $this->assertEquals(1, $this->recipe->countSteps());
     }
 
@@ -45,9 +47,11 @@ class RecipeTest extends TestCase
     {
         $this->recipe->addStep(new RecipeStep('Recipe description', 1));
         $this->recipe->addStep(new RecipeStep('Recipe description 2', 2));
+
         $this->assertEquals(2, $this->recipe->countSteps());
 
         $this->recipe->clearSteps();
+
         $this->assertEmpty($this->recipe->getSteps());
     }
 
@@ -55,11 +59,15 @@ class RecipeTest extends TestCase
     {
         $step2 = new RecipeStep('Recipe description 2', 2);
         $this->recipe->addStep($step2);
+
         $step1 = new RecipeStep('Recipe description 1', 1);
         $this->recipe->addStep($step1);
+
         $step3 = new RecipeStep('Recipe description 3', 3);
         $this->recipe->addStep($step3);
+
         $orderedSteps = $this->recipe->getOrderedSteps();
+
         $this->assertSame($orderedSteps[0], $step1);
         $this->assertSame($orderedSteps[1], $step2);
         $this->assertSame($orderedSteps[2], $step3);

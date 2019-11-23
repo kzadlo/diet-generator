@@ -10,7 +10,7 @@ use App\Diet\Domain\Service\CalorieCalculator;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\UuidInterface;
 
-class OwnerTest extends TestCase
+final class OwnerTest extends TestCase
 {
     private $owner;
 
@@ -19,7 +19,7 @@ class OwnerTest extends TestCase
         $this->owner = new Owner(
             'test@email.com',
             Owner::SEX_MALE,
-            new \DateTime('1995-06-19'),
+            new \DateTime('1999-03-12'),
             new BodyMeasurement(180, 90.5, CalorieCalculator::ACTIVITY_LOW)
         );
     }
@@ -36,6 +36,7 @@ class OwnerTest extends TestCase
     public function testCanChangeEmail()
     {
         $this->owner->changeEmail('change@email.pl');
+
         $this->assertSame('change@email.pl', $this->owner->getEmail());
     }
 
@@ -43,6 +44,7 @@ class OwnerTest extends TestCase
     {
         $bodyMeasurement = new BodyMeasurement(190, 100.5, CalorieCalculator::ACTIVITY_HIGH);
         $this->owner->changeBodyMeasurement($bodyMeasurement);
+
         $this->assertSame($bodyMeasurement, $this->owner->getBodyMeasurement());
     }
 
@@ -58,14 +60,16 @@ class OwnerTest extends TestCase
 
     public function testCanSetFirstName()
     {
-        $this->owner->setFirstName('First');
-        $this->assertSame('First', $this->owner->getFirstName());
+        $this->owner->setFirstName('First Name');
+
+        $this->assertSame('First Name', $this->owner->getFirstName());
     }
 
     public function testCanSetLastName()
     {
-        $this->owner->setLastName('Last');
-        $this->assertSame('Last', $this->owner->getLastName());
+        $this->owner->setLastName('Last Name');
+
+        $this->assertSame('Last Name', $this->owner->getLastName());
     }
 
     public function testCanGeHeight()
@@ -80,6 +84,6 @@ class OwnerTest extends TestCase
 
     public function testCanGetActivityRate()
     {
-        $this->assertSame(1.35, $this->owner->getActivityRate());
+        $this->assertSame(CalorieCalculator::ACTIVITY_LOW, $this->owner->getActivityRate());
     }
 }

@@ -9,7 +9,7 @@ use App\Diet\Domain\Model\ProductType;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\UuidInterface;
 
-class ProductTest extends TestCase
+final class ProductTest extends TestCase
 {
     private $product;
 
@@ -27,6 +27,7 @@ class ProductTest extends TestCase
     public function testCanChangeName()
     {
         $this->product->changeName('Product Name 2');
+
         $this->assertSame('Product Name 2', $this->product->getName());
     }
 
@@ -34,6 +35,7 @@ class ProductTest extends TestCase
     {
         $productType = new ProductType('Type Name');
         $this->product->setProductType($productType);
+
         $this->assertEquals($productType, $this->product->getProductType());
     }
 }

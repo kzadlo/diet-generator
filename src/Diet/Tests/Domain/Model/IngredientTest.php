@@ -11,7 +11,7 @@ use App\Diet\Domain\ValueObject\Calorie;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\UuidInterface;
 
-class IngredientTest extends TestCase
+final class IngredientTest extends TestCase
 {
     private $ingredient;
 
@@ -33,6 +33,7 @@ class IngredientTest extends TestCase
     public function testCanChangeWeight()
     {
         $this->ingredient->changeWeight(200);
+
         $this->assertSame(200, $this->ingredient->getWeight());
     }
 
@@ -43,8 +44,12 @@ class IngredientTest extends TestCase
 
     public function testCanSetMeal()
     {
-        $meal = new Meal('Meal Name', new Calorie(200));
+        $meal = new Meal(
+            'Meal Name',
+            new Calorie(200)
+        );
         $this->ingredient->setMeal($meal);
+
         $this->assertSame($meal, $this->ingredient->getMeal());
     }
 }

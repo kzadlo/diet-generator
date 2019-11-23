@@ -7,7 +7,7 @@ namespace App\Diet\Tests\Domain\ValueObject;
 use App\Diet\Domain\ValueObject\Calorie;
 use PHPUnit\Framework\TestCase;
 
-class CalorieTest extends TestCase
+final class CalorieTest extends TestCase
 {
     private $calorie;
 
@@ -16,18 +16,19 @@ class CalorieTest extends TestCase
         $this->calorie = new Calorie(200);
     }
 
-    public function testHasQuantityAfterCreation()
+    /** @dataProvider provideCaloriesRange */
+    public function testIsInRange(int $range, bool $result)
     {
-        $this->assertSame(200, $this->calorie->getQuantity());
+        $this->assertSame($result, $this->calorie->isInRange($range));
     }
 
-    public function testIsInRange()
+    public function provideCaloriesRange(): array
     {
-        $min = 200 - Calorie::RANGE_SIZE ;
-        $max = 200 + Calorie::RANGE_SIZE;
-        $this->assertTrue($this->calorie->isInRange($min));
-        $this->assertTrue($this->calorie->isInRange($max));
-        $this->assertFalse($this->calorie->isInRange(++$max));
-        $this->assertFalse($this->calorie->isInRange(--$min));
+        return [
+            [200 - Calorie::RANGE_SIZE, true],
+            [200 + Calorie::RANGE_SIZE, true],
+            [199 - Calorie::RANGE_SIZE, false],
+            [201 + Calorie::RANGE_SIZE, false]
+        ];
     }
 }

@@ -10,7 +10,7 @@ use Doctrine\Common\Collections\Collection;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\UuidInterface;
 
-class ProductTypeTest extends TestCase
+final class ProductTypeTest extends TestCase
 {
     private $productType;
 
@@ -30,48 +30,57 @@ class ProductTypeTest extends TestCase
     public function testCanChangeName()
     {
         $this->productType->changeName('Product Type Name 2');
+
         $this->assertSame('Product Type Name 2', $this->productType->getName());
     }
 
     public function testCanAddDescription()
     {
         $this->productType->addDescription('Description for Product Type');
+
         $this->assertSame('Description for Product Type', $this->productType->getDescription());
     }
 
     public function testCanRemoveDescription()
     {
         $this->productType->addDescription('Description for Product Type');
+
         $this->assertTrue($this->productType->hasDescription());
 
         $this->productType->removeDescription();
+
         $this->expectException(\BadMethodCallException::class);
+
         $this->productType->getDescription();
     }
 
     public function testCanAddProduct()
     {
-        $product = new Product('Name');
+        $product = new Product('Product Name');
         $this->productType->addProduct($product);
+
         $this->assertEquals(1, $this->productType->countProducts());
         $this->assertSame($product->getProductType(), $this->productType);
     }
 
     public function testCannotAddSameProduct()
     {
-        $product = new Product('Name');
+        $product = new Product('Product Name');
         $this->productType->addProduct($product);
         $this->productType->addProduct($product);
+
         $this->assertEquals(1, $this->productType->countProducts());
     }
 
     public function testCanClearProducts()
     {
-        $this->productType->addProduct(new Product('Name'));
-        $this->productType->addProduct(new Product('Name'));
+        $this->productType->addProduct(new Product('Product Name'));
+        $this->productType->addProduct(new Product('Product Name'));
+
         $this->assertEquals(2, $this->productType->countProducts());
 
         $this->productType->clearProducts();
+
         $this->assertEmpty($this->productType->getProducts());
     }
 }

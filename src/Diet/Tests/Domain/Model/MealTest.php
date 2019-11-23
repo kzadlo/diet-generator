@@ -14,7 +14,7 @@ use Doctrine\Common\Collections\Collection;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\UuidInterface;
 
-class MealTest extends TestCase
+final class MealTest extends TestCase
 {
     private $meal;
 
@@ -38,6 +38,7 @@ class MealTest extends TestCase
     public function testCanChangeName()
     {
         $this->meal->changeName('Meal Name 2');
+
         $this->assertSame('Meal Name 2', $this->meal->getName());
     }
 
@@ -45,13 +46,18 @@ class MealTest extends TestCase
     {
         $type = new MealType('Meal Type Name');
         $this->meal->setMealType($type);
+
         $this->assertSame($type, $this->meal->getMealType());
     }
 
     public function testCanAddIngredient()
     {
-        $ingredient = new Ingredient(new Product('Product Name'), 100);
+        $ingredient = new Ingredient(
+            new Product('Product Name'),
+            100
+        );
         $this->meal->addIngredient($ingredient);
+
         $this->assertEquals(1, $this->meal->countIngredients());
         $this->assertSame($ingredient->getMeal(), $this->meal);
     }
@@ -64,6 +70,7 @@ class MealTest extends TestCase
         );
         $this->meal->addIngredient($ingredient);
         $this->meal->addIngredient($ingredient);
+
         $this->assertEquals(1, $this->meal->countIngredients());
     }
 
@@ -79,9 +86,11 @@ class MealTest extends TestCase
                 100
             )
         );
+
         $this->assertEquals(2, $this->meal->countIngredients());
 
         $this->meal->clearIngredients();
+
         $this->assertEmpty($this->meal->getIngredients());
     }
 
@@ -89,9 +98,11 @@ class MealTest extends TestCase
     {
         $recipe = new Recipe();
         $this->meal->addRecipe($recipe);
+
         $this->assertSame($recipe, $this->meal->getRecipe());
 
         $this->meal->deleteRecipe();
+
         $this->assertNull($this->meal->getRecipe());
     }
 }
