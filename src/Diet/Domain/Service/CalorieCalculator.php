@@ -7,7 +7,6 @@ namespace App\Diet\Domain\Service;
 use App\Diet\Domain\Model\DietType;
 use App\Diet\Domain\Model\Owner;
 use App\Diet\Domain\ValueObject\Calorie;
-use phpDocumentor\Reflection\Types\Integer;
 
 class CalorieCalculator
 {

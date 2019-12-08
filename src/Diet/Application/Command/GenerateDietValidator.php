@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Diet\Application\Command;
 
-use App\Diet\Infrastructure\Repository\OwnerRepository;
+use App\Diet\Domain\Repository\OwnerRepositoryInterface;
 
 class GenerateDietValidator
 {
@@ -12,7 +12,7 @@ class GenerateDietValidator
 
     private $ownerRepository;
 
-    public function __construct(OwnerRepository $ownerRepository)
+    public function __construct(OwnerRepositoryInterface $ownerRepository)
     {
         $this->ownerRepository = $ownerRepository;
     }
@@ -40,7 +40,9 @@ class GenerateDietValidator
 
     public function getErrorMessage(): ?string
     {
-        return reset($this->messages);
+        return !empty($this->messages)
+            ? reset($this->messages)
+            : null;
     }
 
     private function addError(string $message)

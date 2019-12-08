@@ -44,4 +44,9 @@ final class DietPlanTest extends TestCase
 
         $this->assertSame(5, $this->dietPlan->getDaysQuantity());
     }
+
+    public function testCanGetQuantityMeals()
+    {
+        $this->assertSame(DietType::MEALS_QUANTITY_FIVE, $this->dietPlan->getMealsQuantity());
+    }
 }

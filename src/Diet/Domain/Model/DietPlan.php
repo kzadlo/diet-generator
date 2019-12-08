@@ -59,4 +59,9 @@ class DietPlan
     {
         return $this->owner;
     }
+
+    public function getMealsQuantity(): int
+    {
+        return $this->getType()->getMealsQuantity();
+    }
 }
