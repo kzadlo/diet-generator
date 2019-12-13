@@ -9,17 +9,24 @@ services:
         resource: '../src/*'
         exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
 
-    App\Diet\Application\Command\GenerateDietHandler:
+    command_handlers:
+        namespace: App\Diet\Application\Command\
+        resource: '../src/Diet/Application/Command/*Handler*'
+        tags: [command_handler]
         public: true
 
-    App\Diet\Application\Query\GetPeriodDietExecutor:
+    query_executors:
+        namespace: App\Diet\Application\Query\
+        resource: '../src/Diet/Application/Query/*Executor*'
+        tags: [query_executor]
         public: true
 
-    App\Diet\Application\Query\GetPeriodMealRecipeExecutor:
-        public: true
+    App\Diet\Presentation\Console\PrepareDietPdfConsole:
+        arguments:
+            - '@App\Diet\Application\QueryBus'
+            - '@App\Diet\Application\Service\DietPdfGenerator'
 
-    App\Diet\Application\Query\GetPeriodMealIngredientExecutor:
-        public: true
-
-    App\Diet\Application\Query\GetShoppingListProductExecutor:
-        public: true
+    App\Diet\Presentation\Console\PrepareShoppingListPdfConsole:
+        arguments:
+            - '@App\Diet\Application\QueryBus'
+            - '@App\Diet\Application\Service\ShoppingListPdfGenerator'

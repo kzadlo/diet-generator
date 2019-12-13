@@ -6,7 +6,7 @@ namespace App\Diet\Presentation\Console;
 
 use App\Diet\Application\Query\GetShoppingListProduct;
 use App\Diet\Application\QueryBus;
-use App\Diet\Application\Service\ShoppingListPdfGenerator;
+use App\Diet\Application\Service\PdfGeneratorInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -18,12 +18,12 @@ class PrepareShoppingListPdfConsole extends Command
 
     private $queryBus;
 
-    private $shoppingListPdfGenerator;
+    private $pdfGenerator;
 
-    public function __construct(QueryBus $queryBus, ShoppingListPdfGenerator $shoppingListPdfGenerator)
+    public function __construct(QueryBus $queryBus, PdfGeneratorInterface $pdfGenerator)
     {
         $this->queryBus = $queryBus;
-        $this->shoppingListPdfGenerator = $shoppingListPdfGenerator;
+        $this->pdfGenerator = $pdfGenerator;
 
         parent::__construct();
     }
@@ -47,9 +47,11 @@ class PrepareShoppingListPdfConsole extends Command
         ]);
 
         $getShoppingListProduct = new GetShoppingListProduct($startDate, $endDate);
-        $products = $this->queryBus->dispatch($getShoppingListProduct);
+        $dataToPdf['products'] = $this->queryBus->dispatch($getShoppingListProduct);
+        $dataToPdf['startDate'] = $startDate;
+        $dataToPdf['endDate'] = $endDate;
 
-        $this->shoppingListPdfGenerator->generate($products, $startDate, $endDate);
+        $this->pdfGenerator->generate($dataToPdf);
 
         $output->writeln([
             'Done! Now you can go shopping.'

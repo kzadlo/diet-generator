@@ -7,7 +7,7 @@ namespace App\Diet\Application\Service;
 use Knp\Snappy\Pdf;
 use Twig\Environment;
 
-class ShoppingListPdfGenerator
+class ShoppingListPdfGenerator implements PdfGeneratorInterface
 {
     public const DIRECTORY_PATH = 'var/file/pdf/shopping_list/';
 
@@ -21,15 +21,15 @@ class ShoppingListPdfGenerator
         $this->twig = $twig;
     }
 
-    public function generate(array $products, string $startDate, string $endDate): void
+    public function generate(array $dataToPdf): void
     {
-        $fileName = 'shopping_list_' . $startDate . '_' . $endDate . '.pdf';
+        $fileName = 'shopping_list_' . $dataToPdf['startDate'] . '_' . $dataToPdf['endDate'] . '.pdf';
         $html = $this->twig->render(
             'shopping-list-pdf.html.twig',
             [
-                'products' => $products,
-                'startDate' => $startDate,
-                'endDate' => $endDate,
+                'products' => $dataToPdf['products'],
+                'startDate' => $dataToPdf['startDate'],
+                'endDate' => $dataToPdf['endDate']
             ]
         );
 

@@ -7,7 +7,7 @@ namespace App\Diet\Application\Service;
 use Knp\Snappy\Pdf;
 use Twig\Environment;
 
-class DietPdfGenerator
+class DietPdfGenerator implements PdfGeneratorInterface
 {
     public const DIRECTORY_PATH = 'var/file/pdf/diet/';
 
@@ -21,15 +21,15 @@ class DietPdfGenerator
         $this->twig = $twig;
     }
 
-    public function generate(array $periodMeals, array $periodRecipes, array $periodIngredients): void
+    public function generate(array $dataToPdf): void
     {
-        $fileName = 'diet_period_start_' . key($periodMeals) . '.pdf';
+        $fileName = 'diet_period_start_' . key($dataToPdf['periodDays']) . '.pdf';
         $html = $this->twig->render(
             'diet-pdf.html.twig',
             [
-                'periodMeals' => $periodMeals,
-                'periodRecipes' => $periodRecipes,
-                'periodIngredients' => $periodIngredients
+                'periodDays' => $dataToPdf['periodDays'],
+                'periodRecipes' => $dataToPdf['periodRecipes'],
+                'periodIngredients' => $dataToPdf['periodIngredients']
             ]
         );
 

@@ -8,7 +8,7 @@ use App\Diet\Application\Query\GetPeriodDiet;
 use App\Diet\Application\Query\GetPeriodMealIngredient;
 use App\Diet\Application\Query\GetPeriodMealRecipe;
 use App\Diet\Application\QueryBus;
-use App\Diet\Application\Service\DietPdfGenerator;
+use App\Diet\Application\Service\PdfGeneratorInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -20,12 +20,12 @@ class PrepareDietPdfConsole extends Command
 
     private $queryBus;
 
-    private $dietPdfGenerator;
+    private $pdfGenerator;
 
-    public function __construct(QueryBus $queryBus, DietPdfGenerator $dietPdfGenerator)
+    public function __construct(QueryBus $queryBus, PdfGeneratorInterface $pdfGenerator)
     {
         $this->queryBus = $queryBus;
-        $this->dietPdfGenerator = $dietPdfGenerator;
+        $this->pdfGenerator = $pdfGenerator;
 
         parent::__construct();
     }
@@ -45,15 +45,15 @@ class PrepareDietPdfConsole extends Command
         ]);
 
         $getPeriodDiet = new GetPeriodDiet($input->getArgument('periodId'));
-        $periodDays = $this->queryBus->dispatch($getPeriodDiet);
+        $dataToPdf['periodDays'] = $this->queryBus->dispatch($getPeriodDiet);
 
         $getPeriodMealRecipe = new GetPeriodMealRecipe($input->getArgument('periodId'));
-        $periodRecipes = $this->queryBus->dispatch($getPeriodMealRecipe);
+        $dataToPdf['periodRecipes'] = $this->queryBus->dispatch($getPeriodMealRecipe);
 
         $getPeriodMealIngredient = new GetPeriodMealIngredient($input->getArgument('periodId'));
-        $periodIngredients = $this->queryBus->dispatch($getPeriodMealIngredient);
+        $dataToPdf['periodIngredients'] = $this->queryBus->dispatch($getPeriodMealIngredient);
 
-        $this->dietPdfGenerator->generate($periodDays, $periodRecipes, $periodIngredients);
+        $this->pdfGenerator->generate($dataToPdf);
 
         $output->writeln([
             'Done! Enjoy your meals!'
