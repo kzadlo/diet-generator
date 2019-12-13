@@ -47,7 +47,7 @@ class GenerateDietConsole extends Command
         $this->commandBus->dispatch($generateDietCommand);
 
         $output->writeln([
-           'Done. Enjoy your meals!'
+           'Done! Now you can export diet.'
         ]);
     }
 }

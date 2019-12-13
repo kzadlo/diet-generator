@@ -41,7 +41,7 @@ class PrepareDietPdfConsole extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $output->writeln([
-            'Preparing pdf...',
+            'Preparing diet pdf...',
         ]);
 
         $getPeriodDiet = new GetPeriodDiet($input->getArgument('periodId'));
