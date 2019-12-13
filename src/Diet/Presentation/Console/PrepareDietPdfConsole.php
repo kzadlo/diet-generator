@@ -45,7 +45,7 @@ class PrepareDietPdfConsole extends Command
         ]);
 
         $getPeriodDiet = new GetPeriodDiet($input->getArgument('periodId'));
-        $periodMeals = $this->queryBus->dispatch($getPeriodDiet);
+        $periodDays = $this->queryBus->dispatch($getPeriodDiet);
 
         $getPeriodMealRecipe = new GetPeriodMealRecipe($input->getArgument('periodId'));
         $periodRecipes = $this->queryBus->dispatch($getPeriodMealRecipe);
@@ -53,10 +53,10 @@ class PrepareDietPdfConsole extends Command
         $getPeriodMealIngredient = new GetPeriodMealIngredient($input->getArgument('periodId'));
         $periodIngredients = $this->queryBus->dispatch($getPeriodMealIngredient);
 
-        $this->dietPdfGenerator->generate($periodMeals, $periodRecipes, $periodIngredients);
+        $this->dietPdfGenerator->generate($periodDays, $periodRecipes, $periodIngredients);
 
         $output->writeln([
-            'Done. Enjoy your meals!'
+            'Done! Enjoy your meals!'
         ]);
     }
 }

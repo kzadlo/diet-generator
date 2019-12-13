@@ -43,17 +43,16 @@ class PrepareShoppingListPdfConsole extends Command
         $endDate = $input->getArgument('endDate');
 
         $output->writeln([
-            'Preparing pdf...',
+            'Preparing shopping list pdf...',
         ]);
 
         $getShoppingListProduct = new GetShoppingListProduct($startDate, $endDate);
-
         $products = $this->queryBus->dispatch($getShoppingListProduct);
 
         $this->shoppingListPdfGenerator->generate($products, $startDate, $endDate);
 
         $output->writeln([
-            'Done. Enjoy your meals!'
+            'Done! Now you can go shopping.'
         ]);
     }
 }

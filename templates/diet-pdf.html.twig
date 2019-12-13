@@ -11,12 +11,12 @@
             <h1 class="diet-title">Jadłospis</h1>
             <span class="date-range">
                 <span class="color-element">(</span>
-                {{ periodMeals|first.date|date("d.m.Y") }} - {{ periodMeals|last.date|date("d.m.Y") }}
+                {{ periodDays|first.date|date("d.m.Y") }} - {{ periodDays|last.date|date("d.m.Y") }}
                 <span class="color-element">)</span>
             </span>
         </div>
         <div class="content">
-            {% for day in periodMeals %}
+            {% for day in periodDays %}
                 <div class="{{ loop.first ? '' : 'new-page' }} day-box">
                     <h2 class="day-title">{{ day.dayName }}</h2>
                     <span>
