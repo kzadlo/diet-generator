@@ -13,7 +13,7 @@ final class BodyMeasurementTest extends TestCase
 {
     private $bodyMeasurement;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->bodyMeasurement = new BodyMeasurement(
             180,

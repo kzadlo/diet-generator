@@ -11,7 +11,7 @@ final class CalorieTest extends TestCase
 {
     private $calorie;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->calorie = new Calorie(200);
     }

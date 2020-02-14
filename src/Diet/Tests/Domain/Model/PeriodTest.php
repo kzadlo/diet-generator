@@ -16,7 +16,7 @@ final class PeriodTest extends TestCase
 {
     private $period;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $dietPlan = (new DietPlanFactory())->createDietPlanForTests();
         $this->period = new Period($dietPlan);

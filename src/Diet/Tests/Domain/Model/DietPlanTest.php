@@ -15,7 +15,7 @@ final class DietPlanTest extends TestCase
 {
     private $dietPlan;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->dietPlan = (new DietPlanFactory())->createDietPlanForTests();
     }

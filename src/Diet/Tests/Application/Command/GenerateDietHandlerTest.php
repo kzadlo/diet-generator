@@ -38,7 +38,7 @@ class GenerateDietHandlerTest extends TestCase
 
     private $mealRepository;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->generateDietValidator = $this->prophesize(GenerateDietValidator::class);
         $this->calorieCalculator = $this->prophesize(CalorieCalculator::class);

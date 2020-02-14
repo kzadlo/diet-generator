@@ -14,7 +14,7 @@ final class RecipeTest extends TestCase
 {
     private $recipe;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->recipe = new Recipe();
     }

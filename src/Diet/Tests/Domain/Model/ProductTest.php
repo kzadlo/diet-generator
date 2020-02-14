@@ -13,7 +13,7 @@ final class ProductTest extends TestCase
 {
     private $product;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->product = new Product('Product Name');
     }

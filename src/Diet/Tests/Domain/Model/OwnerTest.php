@@ -14,7 +14,7 @@ final class OwnerTest extends TestCase
 {
     private $owner;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->owner = new Owner(
             'test@email.com',

@@ -18,7 +18,7 @@ final class MealTest extends TestCase
 {
     private $meal;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->meal = new Meal(
             'Meal Name',

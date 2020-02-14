@@ -14,7 +14,7 @@ final class DietTypeTest extends TestCase
 {
     private $dietType;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->dietType = new DietType('Diet Type Name');
     }

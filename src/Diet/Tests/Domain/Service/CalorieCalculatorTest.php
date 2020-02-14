@@ -15,7 +15,7 @@ final class CalorieCalculatorTest extends TestCase
 {
     private $calorieCalculator;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->calorieCalculator = new CalorieCalculator();
     }

@@ -14,7 +14,7 @@ final class ProductTypeTest extends TestCase
 {
     private $productType;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->productType = new ProductType('Product Type Name');
     }

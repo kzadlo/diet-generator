@@ -17,7 +17,7 @@ final class DayTest extends TestCase
 {
     private $day;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->day = new Day('Monday', new \DateTime());
     }

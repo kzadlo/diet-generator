@@ -12,7 +12,7 @@ final class RecipeStepTest extends TestCase
 {
     private $recipeStep;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->recipeStep = new RecipeStep('Recipe description', 1);
     }

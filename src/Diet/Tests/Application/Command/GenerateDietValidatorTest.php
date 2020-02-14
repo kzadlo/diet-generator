@@ -16,7 +16,7 @@ class GenerateDietValidatorTest extends TestCase
 
     private $generateDietValidator;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->ownerRepository = $this->prophesize(OwnerRepositoryInterface::class);
 

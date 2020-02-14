@@ -15,7 +15,7 @@ final class IngredientTest extends TestCase
 {
     private $ingredient;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->ingredient = new Ingredient(
             new Product('Product Name'),
