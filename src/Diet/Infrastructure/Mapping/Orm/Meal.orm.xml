@@ -1,0 +1,23 @@
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                          https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="App\Diet\Domain\Model\Meal" table="meal">
+
+        <id name="id" type="uuid" column="id"/>
+
+        <field name="name" column="name" type="string" unique="true"/>
+
+        <field name="caloriesQuantity" column="calories_quantity" type="integer"/>
+
+        <one-to-one field="recipe" target-entity="Recipe"/>
+
+        <many-to-one field="mealType" target-entity="MealType" inversed-by="meals"/>
+
+        <one-to-many field="ingredients" target-entity="Ingredient" mapped-by="meal" orphan-removal="true">
+        </one-to-many>
+
+    </entity>
+
+</doctrine-mapping>

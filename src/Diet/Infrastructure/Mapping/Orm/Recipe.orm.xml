@@ -1,0 +1,18 @@
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                          https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="App\Diet\Domain\Model\Recipe" table="recipe">
+
+        <id name="id" type="uuid" column="id"/>
+
+        <one-to-many field="steps" target-entity="RecipeStep" mapped-by="recipe" orphan-removal="true">
+            <cascade>
+                <cascade-persist/>
+            </cascade>
+        </one-to-many>
+
+    </entity>
+
+</doctrine-mapping>

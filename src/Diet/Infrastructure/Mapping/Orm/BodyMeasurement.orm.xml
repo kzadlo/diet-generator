@@ -1,0 +1,18 @@
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                          https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="App\Diet\Domain\Model\BodyMeasurement" table="body_measurement">
+
+        <id name="id" type="uuid" column="id"/>
+
+        <field name="height" column="height" type="integer"/>
+
+        <field name="weight" column="weight" type="integer"/>
+
+        <field name="activityRate" column="activity_rate" type="decimal" precision="4" scale="2"/>
+
+    </entity>
+
+</doctrine-mapping>

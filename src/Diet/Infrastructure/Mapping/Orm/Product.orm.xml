@@ -1,0 +1,16 @@
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                          https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="App\Diet\Domain\Model\Product" table="product">
+
+        <id name="id" type="uuid" column="id"/>
+
+        <field name="name" column="name" type="string" unique="true"/>
+
+        <many-to-one field="productType" target-entity="ProductType" inversed-by="products"/>
+
+    </entity>
+
+</doctrine-mapping>

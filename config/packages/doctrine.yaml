@@ -16,7 +16,7 @@ doctrine:
         mappings:
             Diet:
                 is_bundle: false
-                type: yml
-                dir: '%kernel.project_dir%/config/mapping/orm/diet'
+                type: xml
+                dir: '%kernel.project_dir%/src/Diet/Infrastructure/Mapping/Orm'
                 prefix: 'App\Diet\Domain\Model'
                 alias: Diet

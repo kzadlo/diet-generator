@@ -1,0 +1,19 @@
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                          https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="App\Diet\Domain\Model\ProductType" table="product_type">
+
+        <id name="id" type="uuid" column="id"/>
+
+        <field name="name" column="name" type="string"/>
+
+        <field name="description" column="description" type="string" nullable="true"/>
+
+        <one-to-many field="products" target-entity="Product" mapped-by="productType">
+        </one-to-many>
+
+    </entity>
+
+</doctrine-mapping>

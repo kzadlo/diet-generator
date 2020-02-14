@@ -1,0 +1,18 @@
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                          https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="App\Diet\Domain\Model\RecipeStep" table="recipe_step">
+
+        <id name="id" type="uuid" column="id"/>
+
+        <field name="description" column="description" type="string"/>
+
+        <field name="order" column="order" type="integer"/>
+
+        <many-to-one field="recipe" target-entity="Recipe" inversed-by="steps"/>
+
+    </entity>
+
+</doctrine-mapping>
