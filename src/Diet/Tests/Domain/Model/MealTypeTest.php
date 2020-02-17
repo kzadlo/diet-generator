@@ -75,8 +75,8 @@ final class MealTypeTest extends TestCase
 
     public function testCanClearMeals()
     {
-        $this->mealType->addMeal(new Meal('Meal Name' ,new Calorie(200)));
-        $this->mealType->addMeal(new Meal('Meal Name' ,new Calorie(300)));
+        $this->mealType->addMeal(new Meal('Meal Name', new Calorie(200)));
+        $this->mealType->addMeal(new Meal('Meal Name', new Calorie(300)));
 
         $this->assertEquals(2, $this->mealType->countMeals());
 

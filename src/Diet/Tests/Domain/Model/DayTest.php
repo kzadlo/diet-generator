@@ -84,8 +84,8 @@ final class DayTest extends TestCase
             new Meal(
                 'Meal Name',
                 new Calorie(200)
-            ))
-        ;
+            )
+        );
         $this->day->addMeal(
             new Meal(
                 'Meal Name 2',

@@ -34,7 +34,9 @@ class Recipe
     public function getOrderedSteps(): array
     {
         $array = $this->steps->toArray();
-        usort($array, function($a, $b) {return $a->order() > $b->order();});
+        usort($array, function ($a, $b) {
+            return $a->order() > $b->order();
+        });
 
         return $array;
     }

@@ -29,7 +29,7 @@ final class MealTest extends TestCase
     public function testIsEntityValidAfterCreation()
     {
         $this->assertInstanceOf(UuidInterface::class, $this->meal->getId());
-        $this->assertSame('Meal Name', $this->meal->getName());;
+        $this->assertSame('Meal Name', $this->meal->getName());
         $this->assertInstanceOf(Calorie::class, $this->meal->getCalorie());
         $this->assertInstanceOf(Collection::class, $this->meal->getIngredients());
         $this->assertEmpty($this->meal->getIngredients());
@@ -79,13 +79,11 @@ final class MealTest extends TestCase
         $this->meal->addIngredient(new Ingredient(
             new Product('Product Name'),
             100
-            )
-        );
+        ));
         $this->meal->addIngredient(new Ingredient(
-                new Product('Product Name'),
-                100
-            )
-        );
+            new Product('Product Name'),
+            100
+        ));
 
         $this->assertEquals(2, $this->meal->countIngredients());
 

@@ -45,7 +45,7 @@ class GenerateDietValidator
             : null;
     }
 
-    private function addError(string $message)
+    private function addError(string $message): void
     {
         $this->messages[] = $message;
     }
