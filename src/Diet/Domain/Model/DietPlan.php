@@ -15,14 +15,17 @@ class DietPlan
 
     private $dietType;
 
+    private $dietOption;
+
     private $owner;
 
     private $daysQuantity;
 
-    public function __construct(DietType $dietType, Owner $owner)
+    public function __construct(DietType $dietType, DietOption $dietOption, Owner $owner)
     {
         $this->id = Uuid::uuid4();
         $this->changeType($dietType);
+        $this->changeOption($dietOption);
         $this->owner = $owner;
         $this->daysQuantity = self::STANDARD_QUANTITY_DAYS;
     }
@@ -44,14 +47,14 @@ class DietPlan
         return $this;
     }
 
-    public function getDaysQuantity(): int
+    public function getOption(): DietOption
     {
-        return $this->daysQuantity;
+        return $this->dietOption;
     }
 
-    public function changeDaysQuantity(int $daysQuantity): DietPlan
+    public function changeOption(DietOption $dietOption): DietPlan
     {
-        $this->daysQuantity = $daysQuantity;
+        $this->dietOption = $dietOption;
         return $this;
     }
 
@@ -63,5 +66,16 @@ class DietPlan
     public function getMealsQuantity(): int
     {
         return $this->getType()->getMealsQuantity();
+    }
+
+    public function getDaysQuantity(): int
+    {
+        return $this->daysQuantity;
+    }
+
+    public function changeDaysQuantity(int $daysQuantity): DietPlan
+    {
+        $this->daysQuantity = $daysQuantity;
+        return $this;
     }
 }
