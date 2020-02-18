@@ -7,8 +7,6 @@
 
         <id name="id" type="uuid" column="id"/>
 
-        <field name="daysQuantity" column="days_quantity" type="integer"/>
-
         <many-to-one field="dietType" target-entity="DietType" inversed-by="dietPlans"/>
 
         <one-to-one field="dietOption" target-entity="DietOption"/>

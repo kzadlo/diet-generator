@@ -7,6 +7,8 @@
 
         <id name="id" type="uuid" column="id"/>
 
+        <field name="daysQuantity" column="days_quantity" type="integer"/>
+
         <field name="hasMeatFriday" column="has_meat_friday" type="integer"/>
 
     </entity>

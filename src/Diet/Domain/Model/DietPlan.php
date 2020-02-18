@@ -9,8 +9,6 @@ use Ramsey\Uuid\UuidInterface;
 
 class DietPlan
 {
-    public const STANDARD_QUANTITY_DAYS = 7;
-
     private $id;
 
     private $dietType;
@@ -19,15 +17,12 @@ class DietPlan
 
     private $owner;
 
-    private $daysQuantity;
-
     public function __construct(DietType $dietType, DietOption $dietOption, Owner $owner)
     {
         $this->id = Uuid::uuid4();
         $this->changeType($dietType);
         $this->changeOption($dietOption);
         $this->owner = $owner;
-        $this->daysQuantity = self::STANDARD_QUANTITY_DAYS;
     }
 
     public function getId(): UuidInterface
@@ -70,12 +65,6 @@ class DietPlan
 
     public function getDaysQuantity(): int
     {
-        return $this->daysQuantity;
-    }
-
-    public function changeDaysQuantity(int $daysQuantity): DietPlan
-    {
-        $this->daysQuantity = $daysQuantity;
-        return $this;
+        return $this->getOption()->getDaysQuantity();
     }
 }

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Tests\Domain\Model;
 
 use App\Diet\Domain\Model\DietOption;
-use App\Diet\Domain\Model\DietPlan;
 use App\Diet\Domain\Model\DietType;
 use App\Diet\Domain\Model\Owner;
 use App\Diet\Tests\Helper\DietPlanFakeFactory;
@@ -28,7 +27,6 @@ final class DietPlanTest extends TestCase
         $this->assertInstanceOf(DietOption::class, $this->dietPlan->getOption());
         $this->assertInstanceOf(Owner::class, $this->dietPlan->getOwner());
         $this->assertCount(1, $this->dietPlan->getType()->getDietPlans());
-        $this->assertSame(DietPlan::STANDARD_QUANTITY_DAYS, $this->dietPlan->getDaysQuantity());
     }
 
     public function testCanChangeType(): void
@@ -48,15 +46,13 @@ final class DietPlanTest extends TestCase
         $this->assertSame($option, $this->dietPlan->getOption());
     }
 
-    public function testCanChangeQuantityDays(): void
-    {
-        $this->dietPlan->changeDaysQuantity(5);
-
-        $this->assertSame(5, $this->dietPlan->getDaysQuantity());
-    }
-
     public function testCanGetQuantityMeals(): void
     {
         $this->assertSame(DietType::MEALS_QUANTITY_FIVE, $this->dietPlan->getMealsQuantity());
+    }
+
+    public function testCanGetQuantityDays(): void
+    {
+        $this->assertSame(DietOption::STANDARD_QUANTITY_DAYS, $this->dietPlan->getDaysQuantity());
     }
 }

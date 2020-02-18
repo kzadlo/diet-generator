@@ -8,6 +8,7 @@ use App\Diet\Application\Command\GenerateDiet;
 use App\Diet\Application\Command\GenerateDietHandler;
 use App\Diet\Application\Command\GenerateDietValidator;
 use App\Diet\Application\Exception\CommandNotValidException;
+use App\Diet\Domain\Model\DietOption;
 use App\Diet\Domain\Model\DietPlan;
 use App\Diet\Domain\Model\DietType;
 use App\Diet\Domain\Model\Meal;
@@ -86,7 +87,7 @@ class GenerateDietHandlerTest extends TestCase
 
         $dietPlan
             ->getDaysQuantity()
-            ->willReturn(DietPlan::STANDARD_QUANTITY_DAYS);
+            ->willReturn(DietOption::STANDARD_QUANTITY_DAYS);
 
         $dietPlan
             ->getMealsQuantity()
@@ -110,12 +111,12 @@ class GenerateDietHandlerTest extends TestCase
 
         $this->calorieCalculator
             ->calculatePermissibleMealCalories($owner, $dietType, Argument::type('integer'))
-            ->shouldBeCalledTimes(DietPlan::STANDARD_QUANTITY_DAYS * DietType::MEALS_QUANTITY_FIVE)
+            ->shouldBeCalledTimes(DietOption::STANDARD_QUANTITY_DAYS * DietType::MEALS_QUANTITY_FIVE)
             ->willReturn(new Calorie(500));
 
         $this->mealRepository
             ->findRandomInCalorieRange(Argument::type(Calorie::class))
-            ->shouldBeCalledTimes(DietPlan::STANDARD_QUANTITY_DAYS * DietType::MEALS_QUANTITY_FIVE)
+            ->shouldBeCalledTimes(DietOption::STANDARD_QUANTITY_DAYS * DietType::MEALS_QUANTITY_FIVE)
             ->willReturn($meal->reveal());
 
         $this->periodRepository

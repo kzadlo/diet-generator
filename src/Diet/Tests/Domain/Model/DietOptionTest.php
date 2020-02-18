@@ -20,7 +20,15 @@ class DietOptionTest extends TestCase
     public function testIsEntityValidAfterCreation(): void
     {
         $this->assertInstanceOf(UuidInterface::class, $this->dietOption->getId());
+        $this->assertSame(DietOption::STANDARD_QUANTITY_DAYS, $this->dietOption->getDaysQuantity());
         $this->assertFalse($this->dietOption->hasMeatFriday());
+    }
+
+    public function testCanChangeQuantityDays(): void
+    {
+        $this->dietOption->changeDaysQuantity(5);
+
+        $this->assertSame(5, $this->dietOption->getDaysQuantity());
     }
 
     public function testCanActivateMeatFriday(): void
