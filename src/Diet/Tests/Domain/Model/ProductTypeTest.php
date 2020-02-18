@@ -19,7 +19,7 @@ final class ProductTypeTest extends TestCase
         $this->productType = new ProductType('Product Type Name');
     }
 
-    public function testIsEntityValidAfterCreation()
+    public function testIsEntityValidAfterCreation(): void
     {
         $this->assertInstanceOf(UuidInterface::class, $this->productType->getId());
         $this->assertSame('Product Type Name', $this->productType->getName());
@@ -27,21 +27,21 @@ final class ProductTypeTest extends TestCase
         $this->assertEmpty($this->productType->getProducts());
     }
 
-    public function testCanChangeName()
+    public function testCanChangeName(): void
     {
         $this->productType->changeName('Product Type Name 2');
 
         $this->assertSame('Product Type Name 2', $this->productType->getName());
     }
 
-    public function testCanAddDescription()
+    public function testCanAddDescription(): void
     {
         $this->productType->addDescription('Description for Product Type');
 
         $this->assertSame('Description for Product Type', $this->productType->getDescription());
     }
 
-    public function testCanRemoveDescription()
+    public function testCanRemoveDescription(): void
     {
         $this->productType->addDescription('Description for Product Type');
 
@@ -54,7 +54,7 @@ final class ProductTypeTest extends TestCase
         $this->productType->getDescription();
     }
 
-    public function testCanAddProduct()
+    public function testCanAddProduct(): void
     {
         $product = new Product('Product Name');
         $this->productType->addProduct($product);
@@ -63,7 +63,7 @@ final class ProductTypeTest extends TestCase
         $this->assertSame($product->getProductType(), $this->productType);
     }
 
-    public function testCannotAddSameProduct()
+    public function testCannotAddSameProduct(): void
     {
         $product = new Product('Product Name');
         $this->productType->addProduct($product);
@@ -72,7 +72,7 @@ final class ProductTypeTest extends TestCase
         $this->assertEquals(1, $this->productType->countProducts());
     }
 
-    public function testCanClearProducts()
+    public function testCanClearProducts(): void
     {
         $this->productType->addProduct(new Product('Product Name'));
         $this->productType->addProduct(new Product('Product Name'));

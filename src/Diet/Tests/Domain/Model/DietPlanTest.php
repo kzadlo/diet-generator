@@ -20,7 +20,7 @@ final class DietPlanTest extends TestCase
         $this->dietPlan = (new DietPlanFakeFactory())->createDietPlanForTests();
     }
 
-    public function testIsEntityValidAfterCreation()
+    public function testIsEntityValidAfterCreation(): void
     {
         $this->assertInstanceOf(UuidInterface::class, $this->dietPlan->getId());
         $this->assertInstanceOf(DietType::class, $this->dietPlan->getType());
@@ -29,7 +29,7 @@ final class DietPlanTest extends TestCase
         $this->assertSame(DietPlan::STANDARD_QUANTITY_DAYS, $this->dietPlan->getDaysQuantity());
     }
 
-    public function testCanChangeType()
+    public function testCanChangeType(): void
     {
         $type = new DietType('Diet Type Name 2');
         $this->dietPlan->changeType($type);
@@ -38,14 +38,14 @@ final class DietPlanTest extends TestCase
         $this->assertCount(1, $type->getDietPlans());
     }
 
-    public function testCanChangeQuantityDays()
+    public function testCanChangeQuantityDays(): void
     {
         $this->dietPlan->changeDaysQuantity(5);
 
         $this->assertSame(5, $this->dietPlan->getDaysQuantity());
     }
 
-    public function testCanGetQuantityMeals()
+    public function testCanGetQuantityMeals(): void
     {
         $this->assertSame(DietType::MEALS_QUANTITY_FIVE, $this->dietPlan->getMealsQuantity());
     }

@@ -17,13 +17,13 @@ final class RecipeStepTest extends TestCase
         $this->recipeStep = new RecipeStep('Recipe description', 1);
     }
 
-    public function testIsEntityValidAfterCreation()
+    public function testIsEntityValidAfterCreation(): void
     {
         $this->assertInstanceOf(UuidInterface::class, $this->recipeStep->getId());
         $this->assertSame(1, $this->recipeStep->order());
     }
 
-    public function testCanChangeOrder()
+    public function testCanChangeOrder(): void
     {
         $this->recipeStep->changeOrder(2);
 

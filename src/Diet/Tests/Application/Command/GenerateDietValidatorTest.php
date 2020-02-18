@@ -23,7 +23,7 @@ class GenerateDietValidatorTest extends TestCase
         $this->generateDietValidator = new GenerateDietValidator($this->ownerRepository->reveal());
     }
 
-    public function testIsInvalidWhenGivingNonExistentOwnerEmail()
+    public function testIsInvalidWhenGivingNonExistentOwnerEmail(): void
     {
         $generateDietCommand = new GenerateDiet('non-existent-owner@email.pl', '2019-12-12');
 
@@ -35,7 +35,7 @@ class GenerateDietValidatorTest extends TestCase
         $this->assertNotNull($this->generateDietValidator->getErrorMessage());
     }
 
-    public function testIsValidWhenGivingExistentOwnerEmail()
+    public function testIsValidWhenGivingExistentOwnerEmail(): void
     {
         $generateDietCommand = new GenerateDiet('existent-owner@email.pl', '2019-12-12');
         $owner = $this->prophesize(Owner::class);
@@ -49,7 +49,7 @@ class GenerateDietValidatorTest extends TestCase
     }
 
     /** @dataProvider provideWrongFormattedDates */
-    public function testIsInvalidWhenGivingWrongFormattedDate($date)
+    public function testIsInvalidWhenGivingWrongFormattedDate(string $date): void
     {
         $generateDietCommand = new GenerateDiet('existent-owner@email.pl', $date);
         $owner = $this->prophesize(Owner::class);
@@ -62,7 +62,7 @@ class GenerateDietValidatorTest extends TestCase
         $this->assertNotNull($this->generateDietValidator->getErrorMessage());
     }
 
-    public function testIsValidWhenGivingCorrectFormattedDate()
+    public function testIsValidWhenGivingCorrectFormattedDate(): void
     {
         $generateDietCommand = new GenerateDiet('existent-owner@email.pl', '2019-03-02');
         $owner = $this->prophesize(Owner::class);

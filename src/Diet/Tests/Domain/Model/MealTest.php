@@ -26,7 +26,7 @@ final class MealTest extends TestCase
         );
     }
 
-    public function testIsEntityValidAfterCreation()
+    public function testIsEntityValidAfterCreation(): void
     {
         $this->assertInstanceOf(UuidInterface::class, $this->meal->getId());
         $this->assertSame('Meal Name', $this->meal->getName());
@@ -35,14 +35,14 @@ final class MealTest extends TestCase
         $this->assertEmpty($this->meal->getIngredients());
     }
 
-    public function testCanChangeName()
+    public function testCanChangeName(): void
     {
         $this->meal->changeName('Meal Name 2');
 
         $this->assertSame('Meal Name 2', $this->meal->getName());
     }
 
-    public function testCanSetMealType()
+    public function testCanSetMealType(): void
     {
         $type = new MealType('Meal Type Name');
         $this->meal->setMealType($type);
@@ -50,7 +50,7 @@ final class MealTest extends TestCase
         $this->assertSame($type, $this->meal->getMealType());
     }
 
-    public function testCanAddIngredient()
+    public function testCanAddIngredient(): void
     {
         $ingredient = new Ingredient(
             new Product('Product Name'),
@@ -62,7 +62,7 @@ final class MealTest extends TestCase
         $this->assertSame($ingredient->getMeal(), $this->meal);
     }
 
-    public function testCannotAddSameIngredient()
+    public function testCannotAddSameIngredient(): void
     {
         $ingredient = new Ingredient(
             new Product('Product Name'),
@@ -74,7 +74,7 @@ final class MealTest extends TestCase
         $this->assertEquals(1, $this->meal->countIngredients());
     }
 
-    public function testCanClearIngredients()
+    public function testCanClearIngredients(): void
     {
         $this->meal->addIngredient(new Ingredient(
             new Product('Product Name'),
@@ -92,7 +92,7 @@ final class MealTest extends TestCase
         $this->assertEmpty($this->meal->getIngredients());
     }
 
-    public function testCanDeleteRecipe()
+    public function testCanDeleteRecipe(): void
     {
         $recipe = new Recipe();
         $this->meal->addRecipe($recipe);

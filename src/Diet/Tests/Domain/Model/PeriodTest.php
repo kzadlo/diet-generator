@@ -22,7 +22,7 @@ final class PeriodTest extends TestCase
         $this->period = new Period($dietPlan);
     }
 
-    public function testIsEntityValidAfterCreation()
+    public function testIsEntityValidAfterCreation(): void
     {
         $this->assertInstanceOf(UuidInterface::class, $this->period->getId());
         $this->assertInstanceOf(DietPlan::class, $this->period->getDietPlan());
@@ -30,7 +30,7 @@ final class PeriodTest extends TestCase
         $this->assertEmpty($this->period->getDays());
     }
 
-    public function testCanChangeDietPlan()
+    public function testCanChangeDietPlan(): void
     {
         $dietPlan = (new DietPlanFakeFactory())->createDietPlanForTests();
         $this->period->changeDietPlan($dietPlan);
@@ -38,7 +38,7 @@ final class PeriodTest extends TestCase
         $this->assertSame($dietPlan, $this->period->getDietPlan());
     }
 
-    public function testCanAddDay()
+    public function testCanAddDay(): void
     {
         $day = new Day('Day Name', new \DateTime());
         $this->period->addDay($day);
@@ -47,7 +47,7 @@ final class PeriodTest extends TestCase
         $this->assertSame($day->getPeriod(), $this->period);
     }
 
-    public function testCannotAddSameDay()
+    public function testCannotAddSameDay(): void
     {
         $day = new Day('Day Name', new \DateTime());
         $this->period->addDay($day);
@@ -56,7 +56,7 @@ final class PeriodTest extends TestCase
         $this->assertEquals(1, $this->period->countDays());
     }
 
-    public function testCanClearDays()
+    public function testCanClearDays(): void
     {
         $this->period->addDay(new Day('Day Name', new \DateTime()));
         $this->period->addDay(new Day('Day Name', new \DateTime()));

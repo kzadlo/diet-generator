@@ -21,7 +21,7 @@ final class CalorieCalculatorTest extends TestCase
     }
 
     /** @dataProvider provideMealCaloriesDetails */
-    public function testCanCalculatePermissibleMealCalories(int $expectedCalories, int $mealNumber)
+    public function testCanCalculatePermissibleMealCalories(int $expectedCalories, int $mealNumber): void
     {
         $dietType = new DietType('Diet Type Name');
 
@@ -46,7 +46,7 @@ final class CalorieCalculatorTest extends TestCase
         int $weight,
         float $activityRate,
         int $calories
-    ) {
+    ) : void {
         $ownerFactory = new OwnerFactory();
         $owner = $ownerFactory->create(
             'test@email.pl',

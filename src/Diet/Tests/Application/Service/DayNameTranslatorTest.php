@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 class DayNameTranslatorTest extends TestCase
 {
     /** @dataProvider provideWrongDayShortcuts */
-    public function testCannotMapOtherStringThanDayShortcut($dayShortcut)
+    public function testCannotMapOtherStringThanDayShortcut(string $dayShortcut): void
     {
         $this->expectException(DayNameNotFoundException::class);
         $this->expectExceptionMessage('Day with this shortcut does not exist.');
@@ -18,7 +18,7 @@ class DayNameTranslatorTest extends TestCase
     }
 
     /** @dataProvider provideDayShortcuts */
-    public function testCanMapDayShortcutToPolishName($dayShortcut, $dayPolishName)
+    public function testCanMapDayShortcutToPolishName(string $dayShortcut, string $dayPolishName): void
     {
         $this->assertSame($dayPolishName, DayNameTranslator::map($dayShortcut));
     }

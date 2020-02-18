@@ -18,20 +18,20 @@ final class ProductTest extends TestCase
         $this->product = new Product('Product Name');
     }
 
-    public function testIsEntityValidAfterCreation()
+    public function testIsEntityValidAfterCreation(): void
     {
         $this->assertInstanceOf(UuidInterface::class, $this->product->getId());
         $this->assertSame('Product Name', $this->product->getName());
     }
 
-    public function testCanChangeName()
+    public function testCanChangeName(): void
     {
         $this->product->changeName('Product Name 2');
 
         $this->assertSame('Product Name 2', $this->product->getName());
     }
 
-    public function testCanSetProductType()
+    public function testCanSetProductType(): void
     {
         $productType = new ProductType('Type Name');
         $this->product->setProductType($productType);

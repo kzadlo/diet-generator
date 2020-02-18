@@ -20,7 +20,7 @@ final class MealTypeTest extends TestCase
         $this->mealType = new MealType('Meal Type Name');
     }
 
-    public function testIsEntityValidAfterCreation()
+    public function testIsEntityValidAfterCreation(): void
     {
         $this->assertInstanceOf(UuidInterface::class, $this->mealType->getId());
         $this->assertSame('Meal Type Name', $this->mealType->getName());
@@ -28,21 +28,21 @@ final class MealTypeTest extends TestCase
         $this->assertEmpty($this->mealType->getMeals());
     }
 
-    public function testCanChangeName()
+    public function testCanChangeName(): void
     {
         $this->mealType->changeName('Meal Type Name 2');
 
         $this->assertSame('Meal Type Name 2', $this->mealType->getName());
     }
 
-    public function testCanAddDescription()
+    public function testCanAddDescription(): void
     {
         $this->mealType->addDescription('Description for Meal Type');
 
         $this->assertSame('Description for Meal Type', $this->mealType->getDescription());
     }
 
-    public function testCanRemoveDescription()
+    public function testCanRemoveDescription(): void
     {
         $this->mealType->addDescription('Description for Meal Type');
 
@@ -55,7 +55,7 @@ final class MealTypeTest extends TestCase
         $this->mealType->getDescription();
     }
 
-    public function testCanAddMeal()
+    public function testCanAddMeal(): void
     {
         $meal = new Meal('Meal Name', new Calorie(200));
         $this->mealType->addMeal($meal);
@@ -64,7 +64,7 @@ final class MealTypeTest extends TestCase
         $this->assertSame($meal->getMealType(), $this->mealType);
     }
 
-    public function testCannotAddSameMeal()
+    public function testCannotAddSameMeal(): void
     {
         $meal = new Meal('Meal Name', new Calorie(200));
         $this->mealType->addMeal($meal);
@@ -73,7 +73,7 @@ final class MealTypeTest extends TestCase
         $this->assertEquals(1, $this->mealType->countMeals());
     }
 
-    public function testCanClearMeals()
+    public function testCanClearMeals(): void
     {
         $this->mealType->addMeal(new Meal('Meal Name', new Calorie(200)));
         $this->mealType->addMeal(new Meal('Meal Name', new Calorie(300)));
@@ -85,7 +85,7 @@ final class MealTypeTest extends TestCase
         $this->assertEmpty($this->mealType->getMeals());
     }
 
-    public function testCanSetOrder()
+    public function testCanSetOrder(): void
     {
         $this->mealType->setOrder(2);
 

@@ -19,7 +19,7 @@ final class DietTypeTest extends TestCase
         $this->dietType = new DietType('Diet Type Name');
     }
 
-    public function testIsEntityValidAfterCreation()
+    public function testIsEntityValidAfterCreation(): void
     {
         $this->assertInstanceOf(UuidInterface::class, $this->dietType->getId());
         $this->assertSame('Diet Type Name', $this->dietType->getName());
@@ -28,21 +28,21 @@ final class DietTypeTest extends TestCase
         $this->assertSame(DietType::MEALS_QUANTITY_FIVE, $this->dietType->getMealsQuantity());
     }
 
-    public function testCanChangeName()
+    public function testCanChangeName(): void
     {
         $this->dietType->changeName('Diet Type Name 2');
 
         $this->assertSame('Diet Type Name 2', $this->dietType->getName());
     }
 
-    public function testCanAddDescription()
+    public function testCanAddDescription(): void
     {
         $this->dietType->addDescription('Description for Diet Type');
 
         $this->assertSame('Description for Diet Type', $this->dietType->getDescription());
     }
 
-    public function testCanRemoveDescription()
+    public function testCanRemoveDescription(): void
     {
         $this->dietType->addDescription('Description for Diet Type');
 
@@ -55,7 +55,7 @@ final class DietTypeTest extends TestCase
         $this->dietType->getDescription();
     }
 
-    public function testCanAddDietPlan()
+    public function testCanAddDietPlan(): void
     {
         $dietPlan = (new DietPlanFakeFactory())->createDietPlanForTests();
         $this->dietType->addDietPlan($dietPlan);
@@ -64,7 +64,7 @@ final class DietTypeTest extends TestCase
         $this->assertSame($dietPlan->getType(), $this->dietType);
     }
 
-    public function testCannotAddSameDietPlan()
+    public function testCannotAddSameDietPlan(): void
     {
         $dietPlan = (new DietPlanFakeFactory())->createDietPlanForTests();
         $this->dietType->addDietPlan($dietPlan);
@@ -73,7 +73,7 @@ final class DietTypeTest extends TestCase
         $this->assertEquals(1, $this->dietType->countDietPlans());
     }
 
-    public function testCanClearDietPlans()
+    public function testCanClearDietPlans(): void
     {
         $dietPlan1 = (new DietPlanFakeFactory())->createDietPlanForTests();
         $this->dietType->addDietPlan($dietPlan1);
@@ -88,14 +88,14 @@ final class DietTypeTest extends TestCase
         $this->assertEmpty($this->dietType->getDietPlans());
     }
 
-    public function testCanChangeMealsQuantity()
+    public function testCanChangeMealsQuantity(): void
     {
         $this->dietType->applyFourMealsPerDay();
 
         $this->assertSame(DietType::MEALS_QUANTITY_FOUR, $this->dietType->getMealsQuantity());
     }
 
-    public function testCanGetCaloriePerDayRates()
+    public function testCanGetCaloriePerDayRates(): void
     {
         $this->assertCount(DietType::MEALS_QUANTITY_FIVE, $this->dietType->getCaloriePerDayRates());
 

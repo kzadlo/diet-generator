@@ -17,7 +17,7 @@ final class CalorieTest extends TestCase
     }
 
     /** @dataProvider provideCaloriesRange */
-    public function testIsInRange(int $range, bool $result)
+    public function testIsInRange(int $range, bool $result): void
     {
         $this->assertSame($result, $this->calorie->isInRange($range));
     }

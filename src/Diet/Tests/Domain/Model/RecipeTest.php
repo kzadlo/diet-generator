@@ -19,14 +19,14 @@ final class RecipeTest extends TestCase
         $this->recipe = new Recipe();
     }
 
-    public function testIsEntityValidAfterCreation()
+    public function testIsEntityValidAfterCreation(): void
     {
         $this->assertInstanceOf(UuidInterface::class, $this->recipe->getId());
         $this->assertEmpty($this->recipe->getSteps());
         $this->assertInstanceOf(Collection::class, $this->recipe->getSteps());
     }
 
-    public function testCanAddStep()
+    public function testCanAddStep(): void
     {
         $step = new RecipeStep('Recipe description', 1);
         $this->recipe->addStep($step);
@@ -35,7 +35,7 @@ final class RecipeTest extends TestCase
         $this->assertSame($step->getRecipe(), $this->recipe);
     }
 
-    public function testCannotAddStepWithSameOrder()
+    public function testCannotAddStepWithSameOrder(): void
     {
         $this->recipe->addStep(new RecipeStep('Recipe description', 1));
         $this->recipe->addStep(new RecipeStep('Recipe description 2', 1));
@@ -43,7 +43,7 @@ final class RecipeTest extends TestCase
         $this->assertEquals(1, $this->recipe->countSteps());
     }
 
-    public function testCanClearSteps()
+    public function testCanClearSteps(): void
     {
         $this->recipe->addStep(new RecipeStep('Recipe description', 1));
         $this->recipe->addStep(new RecipeStep('Recipe description 2', 2));
@@ -55,7 +55,7 @@ final class RecipeTest extends TestCase
         $this->assertEmpty($this->recipe->getSteps());
     }
 
-    public function testCanGetOrderSteps()
+    public function testCanGetOrderSteps(): void
     {
         $step2 = new RecipeStep('Recipe description 2', 2);
         $this->recipe->addStep($step2);
@@ -73,7 +73,7 @@ final class RecipeTest extends TestCase
         $this->assertSame($orderedSteps[2], $step3);
     }
 
-    public function testCanGetRecipeText()
+    public function testCanGetRecipeText(): void
     {
         $this->recipe->addStep(new RecipeStep('Recipe description 1', 1));
         $this->recipe->addStep(new RecipeStep('Recipe description 2', 2));

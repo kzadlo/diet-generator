@@ -57,7 +57,7 @@ class GenerateDietHandlerTest extends TestCase
         );
     }
 
-    public function testIsGenerateDietCommandValidated()
+    public function testIsGenerateDietCommandValidated(): void
     {
         $generateDietCommand = new GenerateDiet('non-existent-owner@email.pl', '2019-12-12');
 
@@ -75,7 +75,7 @@ class GenerateDietHandlerTest extends TestCase
         $this->generateDietHandler->handle($generateDietCommand);
     }
 
-    public function testIsGenerateDietCommand()
+    public function testIsGenerateDietCommand(): void
     {
         $generateDietCommand = new GenerateDiet('existent-owner@email.pl', '2019-12-12');
 

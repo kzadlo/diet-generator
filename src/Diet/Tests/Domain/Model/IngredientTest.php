@@ -23,26 +23,26 @@ final class IngredientTest extends TestCase
         );
     }
 
-    public function testIsEntityValidAfterCreation()
+    public function testIsEntityValidAfterCreation(): void
     {
         $this->assertInstanceOf(UuidInterface::class, $this->ingredient->getId());
         $this->assertInstanceOf(Product::class, $this->ingredient->getProduct());
         $this->assertSame(100, $this->ingredient->getWeight());
     }
 
-    public function testCanChangeWeight()
+    public function testCanChangeWeight(): void
     {
         $this->ingredient->changeWeight(200);
 
         $this->assertSame(200, $this->ingredient->getWeight());
     }
 
-    public function testCanGetWeightWithUnit()
+    public function testCanGetWeightWithUnit(): void
     {
         $this->assertEquals('100 g', $this->ingredient->getWeightWithUnit());
     }
 
-    public function testCanSetMeal()
+    public function testCanSetMeal(): void
     {
         $meal = new Meal(
             'Meal Name',

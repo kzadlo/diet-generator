@@ -22,7 +22,7 @@ final class DayTest extends TestCase
         $this->day = new Day('Monday', new \DateTime());
     }
 
-    public function testIsEntityValidAfterCreation()
+    public function testIsEntityValidAfterCreation(): void
     {
         $this->assertInstanceOf(UuidInterface::class, $this->day->getId());
         $this->assertSame('Monday', $this->day->getName());
@@ -31,14 +31,14 @@ final class DayTest extends TestCase
         $this->assertEmpty($this->day->getMeals());
     }
 
-    public function testCanChangeName()
+    public function testCanChangeName(): void
     {
         $this->day->changeName('Tuesday');
 
         $this->assertSame('Tuesday', $this->day->getName());
     }
 
-    public function testCanChangeDate()
+    public function testCanChangeDate(): void
     {
         $date = new \DateTime();
         $this->day->changeDate($date);
@@ -46,7 +46,7 @@ final class DayTest extends TestCase
         $this->assertSame($date, $this->day->getDate());
     }
 
-    public function testCanSetPeriod()
+    public function testCanSetPeriod(): void
     {
         $dietPlan = (new DietPlanFakeFactory())->createDietPlanForTests();
         $period = new Period($dietPlan);
@@ -55,7 +55,7 @@ final class DayTest extends TestCase
         $this->assertSame($period, $this->day->getPeriod());
     }
 
-    public function testCanAddMeal()
+    public function testCanAddMeal(): void
     {
         $meal = new Meal(
             'Meal Name',
@@ -66,7 +66,7 @@ final class DayTest extends TestCase
         $this->assertEquals(1, $this->day->countMeals());
     }
 
-    public function testCannotAddSameMeal()
+    public function testCannotAddSameMeal(): void
     {
         $meal = new Meal(
             'Meal Name',
@@ -78,7 +78,7 @@ final class DayTest extends TestCase
         $this->assertEquals(1, $this->day->countMeals());
     }
 
-    public function testCanClearMeals()
+    public function testCanClearMeals(): void
     {
         $this->day->addMeal(
             new Meal(
