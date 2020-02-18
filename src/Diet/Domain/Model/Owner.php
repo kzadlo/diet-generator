@@ -10,6 +10,7 @@ use Ramsey\Uuid\UuidInterface;
 class Owner
 {
     public const SEX_MALE = 'male';
+
     public const SEX_FEMALE = 'female';
 
     private $id;
