@@ -18,7 +18,7 @@ class QueryBus
 
     public function dispatch(object $query)
     {
-        $executorName = get_class($query) . 'Executor';
+        $executorName = $this->makeExecutorName($query);
 
         if (!$this->container->has($executorName)) {
             throw new QueryExecutorNotFoundException($executorName . ' does not exist!');
@@ -27,5 +27,10 @@ class QueryBus
         $executor = $this->container->get($executorName);
 
         return $executor->execute($query);
+    }
+
+    private function makeExecutorName(object $query): string
+    {
+        return get_class($query) . 'Executor';
     }
 }

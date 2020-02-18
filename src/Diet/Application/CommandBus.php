@@ -18,7 +18,7 @@ class CommandBus
 
     public function dispatch(object $command)
     {
-        $handlerName = get_class($command) . 'Handler';
+        $handlerName = $this->makeHandlerName($command);
 
         if (!$this->container->has($handlerName)) {
             throw new CommandHandlerNotFoundException($handlerName . ' does not exist!');
@@ -26,5 +26,10 @@ class CommandBus
 
         $handler = $this->container->get($handlerName);
         $handler->handle($command);
+    }
+
+    private function makeHandlerName(object $command): string
+    {
+        return get_class($command) . 'Handler';
     }
 }
