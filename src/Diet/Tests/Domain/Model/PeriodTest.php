@@ -7,7 +7,7 @@ namespace App\Diet\Tests\Domain\Model;
 use App\Diet\Domain\Model\Day;
 use App\Diet\Domain\Model\DietPlan;
 use App\Diet\Domain\Model\Period;
-use App\Diet\Tests\Helper\DietPlanFactory;
+use App\Diet\Tests\Helper\DietPlanFakeFactory;
 use Doctrine\Common\Collections\Collection;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\UuidInterface;
@@ -18,7 +18,7 @@ final class PeriodTest extends TestCase
 
     protected function setUp(): void
     {
-        $dietPlan = (new DietPlanFactory())->createDietPlanForTests();
+        $dietPlan = (new DietPlanFakeFactory())->createDietPlanForTests();
         $this->period = new Period($dietPlan);
     }
 
@@ -32,7 +32,7 @@ final class PeriodTest extends TestCase
 
     public function testCanChangeDietPlan()
     {
-        $dietPlan = (new DietPlanFactory())->createDietPlanForTests();
+        $dietPlan = (new DietPlanFakeFactory())->createDietPlanForTests();
         $this->period->changeDietPlan($dietPlan);
 
         $this->assertSame($dietPlan, $this->period->getDietPlan());

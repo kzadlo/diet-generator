@@ -7,7 +7,7 @@ namespace App\Tests\Domain\Model;
 use App\Diet\Domain\Model\DietPlan;
 use App\Diet\Domain\Model\DietType;
 use App\Diet\Domain\Model\Owner;
-use App\Diet\Tests\Helper\DietPlanFactory;
+use App\Diet\Tests\Helper\DietPlanFakeFactory;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\UuidInterface;
 
@@ -17,7 +17,7 @@ final class DietPlanTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->dietPlan = (new DietPlanFactory())->createDietPlanForTests();
+        $this->dietPlan = (new DietPlanFakeFactory())->createDietPlanForTests();
     }
 
     public function testIsEntityValidAfterCreation()

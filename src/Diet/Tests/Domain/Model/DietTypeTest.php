@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Tests\Domain\Model;
 
 use App\Diet\Domain\Model\DietType;
-use App\Diet\Tests\Helper\DietPlanFactory;
+use App\Diet\Tests\Helper\DietPlanFakeFactory;
 use Doctrine\Common\Collections\Collection;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\UuidInterface;
@@ -57,7 +57,7 @@ final class DietTypeTest extends TestCase
 
     public function testCanAddDietPlan()
     {
-        $dietPlan = (new DietPlanFactory())->createDietPlanForTests();
+        $dietPlan = (new DietPlanFakeFactory())->createDietPlanForTests();
         $this->dietType->addDietPlan($dietPlan);
 
         $this->assertEquals(1, $this->dietType->countDietPlans());
@@ -66,7 +66,7 @@ final class DietTypeTest extends TestCase
 
     public function testCannotAddSameDietPlan()
     {
-        $dietPlan = (new DietPlanFactory())->createDietPlanForTests();
+        $dietPlan = (new DietPlanFakeFactory())->createDietPlanForTests();
         $this->dietType->addDietPlan($dietPlan);
         $this->dietType->addDietPlan($dietPlan);
 
@@ -75,10 +75,10 @@ final class DietTypeTest extends TestCase
 
     public function testCanClearDietPlans()
     {
-        $dietPlan1 = (new DietPlanFactory())->createDietPlanForTests();
+        $dietPlan1 = (new DietPlanFakeFactory())->createDietPlanForTests();
         $this->dietType->addDietPlan($dietPlan1);
 
-        $dietPlan2 = (new DietPlanFactory())->createDietPlanForTests();
+        $dietPlan2 = (new DietPlanFakeFactory())->createDietPlanForTests();
         $this->dietType->addDietPlan($dietPlan2);
 
         $this->assertEquals(2, $this->dietType->countDietPlans());

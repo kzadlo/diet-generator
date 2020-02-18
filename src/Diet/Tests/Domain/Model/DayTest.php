@@ -8,7 +8,7 @@ use App\Diet\Domain\Model\Day;
 use App\Diet\Domain\Model\Meal;
 use App\Diet\Domain\Model\Period;
 use App\Diet\Domain\ValueObject\Calorie;
-use App\Diet\Tests\Helper\DietPlanFactory;
+use App\Diet\Tests\Helper\DietPlanFakeFactory;
 use Doctrine\Common\Collections\Collection;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\UuidInterface;
@@ -48,7 +48,7 @@ final class DayTest extends TestCase
 
     public function testCanSetPeriod()
     {
-        $dietPlan = (new DietPlanFactory())->createDietPlanForTests();
+        $dietPlan = (new DietPlanFakeFactory())->createDietPlanForTests();
         $period = new Period($dietPlan);
         $this->day->setPeriod($period);
 
