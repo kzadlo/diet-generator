@@ -21,10 +21,10 @@ class Day
 
     private $meals;
 
-    public function __construct(string $name, \DateTimeInterface $date)
+    public function __construct(\DateTimeInterface $date)
     {
         $this->id = Uuid::uuid4();
-        $this->name = $name;
+        $this->name = $date->format('D');
         $this->date = $date;
         $this->meals = new ArrayCollection();
     }
@@ -37,12 +37,6 @@ class Day
     public function getName(): string
     {
         return $this->name;
-    }
-
-    public function changeName(string $name): Day
-    {
-        $this->name = $name;
-        return $this;
     }
 
     public function isMeatFriday(bool $hasMeatFriday): bool

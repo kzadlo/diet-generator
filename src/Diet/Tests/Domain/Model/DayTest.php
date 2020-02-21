@@ -19,23 +19,16 @@ final class DayTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->day = new Day('Mon', new \DateTime());
+        $this->day = new Day(new \DateTime('2020-02-20'));
     }
 
     public function testIsEntityValidAfterCreation(): void
     {
         $this->assertInstanceOf(UuidInterface::class, $this->day->getId());
-        $this->assertSame('Mon', $this->day->getName());
+        $this->assertSame('Thu', $this->day->getName());
         $this->assertInstanceOf(\DateTimeInterface::class, $this->day->getDate());
         $this->assertInstanceOf(Collection::class, $this->day->getMeals());
         $this->assertEmpty($this->day->getMeals());
-    }
-
-    public function testCanChangeName(): void
-    {
-        $this->day->changeName('Tue');
-
-        $this->assertSame('Tue', $this->day->getName());
     }
 
     public function testCanCheckThatIsMeatFriday(): void
@@ -43,7 +36,7 @@ final class DayTest extends TestCase
         $this->assertFalse($this->day->isMeatFriday(false));
         $this->assertFalse($this->day->isMeatFriday(true));
 
-        $this->day->changeName('Fri');
+        $this->day = new Day(new \DateTime('2020-02-21'));
 
         $this->assertFalse($this->day->isMeatFriday(false));
         $this->assertTrue($this->day->isMeatFriday(true));

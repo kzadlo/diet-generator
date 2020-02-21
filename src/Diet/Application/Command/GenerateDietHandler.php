@@ -58,7 +58,7 @@ class GenerateDietHandler
         for ($dayNumber = 0; $dayNumber < $dietPlan->getDaysQuantity(); $dayNumber++) {
             $date = new \DateTime($generateDietCommand->getStartDate());
             $date->modify(sprintf('+%d days', $dayNumber));
-            $day = new Day($date->format('D'), $date);
+            $day = new Day($date);
 
             for ($mealNumber = 1; $mealNumber <= $dietPlan->getMealsQuantity(); $mealNumber++) {
                 $mealCalorie = $this->calorieCalculator
