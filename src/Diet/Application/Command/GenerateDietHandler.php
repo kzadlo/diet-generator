@@ -6,6 +6,7 @@ namespace App\Diet\Application\Command;
 
 use App\Diet\Application\Exception\CommandNotValidException;
 use App\Diet\Domain\Model\Day;
+use App\Diet\Domain\Model\Meal;
 use App\Diet\Domain\Model\Period;
 use App\Diet\Domain\Repository\DietPlanRepositoryInterface;
 use App\Diet\Domain\Repository\MealRepositoryInterface;
@@ -62,7 +63,19 @@ class GenerateDietHandler
             for ($mealNumber = 1; $mealNumber <= $dietPlan->getMealsQuantity(); $mealNumber++) {
                 $mealCalorie = $this->calorieCalculator
                     ->calculatePermissibleMealCalories($owner, $dietPlan->getType(), $mealNumber);
-                $meal = $this->mealRepository->findRandomInCalorieRange($mealCalorie);
+
+                $excludedMealIds = [];
+                $isWithMeat = ($day->getName() !== 'Fri' || $day->isMeatFriday($dietPlan->getOption()->hasMeatFriday()));
+                if (!$isWithMeat) {
+                    $mealsWithMeat = $this->mealRepository->findAllInCalorieRangeWithoutMeat($mealCalorie);
+
+                    /** @var Meal $mealWithMeat */
+                    foreach ($mealsWithMeat as $mealWithMeat) {
+                        $excludedMealIds[] = $mealWithMeat->getId();
+                    }
+                }
+
+                $meal = $this->mealRepository->findRandomInCalorieRange($mealCalorie, $excludedMealIds);
 
                 $day->addMeal($meal);
             }

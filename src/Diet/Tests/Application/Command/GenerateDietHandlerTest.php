@@ -83,7 +83,12 @@ class GenerateDietHandlerTest extends TestCase
         $owner = $this->prophesize(Owner::class);
         $meal = $this->prophesize(Meal::class);
         $dietType = $this->prophesize(DietType::class);
+        $dietOption = $this->prophesize(DietOption::class);
         $dietPlan = $this->prophesize(DietPlan::class);
+
+        $dietOption
+            ->hasMeatFriday()
+            ->willReturn(false);
 
         $dietPlan
             ->getDaysQuantity()
@@ -96,6 +101,10 @@ class GenerateDietHandlerTest extends TestCase
         $dietPlan
             ->getType()
             ->willReturn($dietType->reveal());
+
+        $dietPlan
+            ->getOption()
+            ->willReturn($dietOption->reveal());
 
         $this->generateDietValidator
             ->isValid($generateDietCommand)
@@ -115,7 +124,12 @@ class GenerateDietHandlerTest extends TestCase
             ->willReturn(new Calorie(500));
 
         $this->mealRepository
-            ->findRandomInCalorieRange(Argument::type(Calorie::class))
+            ->findAllInCalorieRangeWithoutMeat(Argument::type(Calorie::class))
+            ->shouldBeCalledTimes(DietType::MEALS_QUANTITY_FIVE)
+            ->willReturn([]);
+
+        $this->mealRepository
+            ->findRandomInCalorieRange(Argument::type(Calorie::class), [])
             ->shouldBeCalledTimes(DietOption::STANDARD_QUANTITY_DAYS * DietType::MEALS_QUANTITY_FIVE)
             ->willReturn($meal->reveal());
 

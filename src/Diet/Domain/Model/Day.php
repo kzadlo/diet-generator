@@ -45,6 +45,11 @@ class Day
         return $this;
     }
 
+    public function isMeatFriday(bool $hasMeatFriday): bool
+    {
+        return ($this->name === 'Fri' && $hasMeatFriday);
+    }
+
     public function getDate(): \DateTimeInterface
     {
         return $this->date;

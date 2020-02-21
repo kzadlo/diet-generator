@@ -13,7 +13,9 @@ interface MealRepositoryInterface
 
     public function remove(Meal $meal): void;
 
-    public function countAllInCalorieRange(Calorie $calorie): int;
+    public function countAllInCalorieRange(Calorie $calorie, array $excludedIds): int;
 
-    public function findRandomInCalorieRange(Calorie $calorie): ?Meal;
+    public function findRandomInCalorieRange(Calorie $calorie, array $excludedIds): ?Meal;
+
+    public function findAllInCalorieRangeWithoutMeat(Calorie $calorie): array;
 }

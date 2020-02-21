@@ -30,13 +30,21 @@ final class MealRepository implements MealRepositoryInterface
         $this->entityManager->flush();
     }
 
-    public function countAllInCalorieRange(Calorie $calorie): int
+    public function countAllInCalorieRange(Calorie $calorie, array $excludedIds): int
     {
-        return (int) $this->entityManager
+        $query = $this->entityManager
             ->createQueryBuilder()
             ->select('COUNT(m.id)')
-            ->from(Meal::class, 'm')
-            ->where('m.caloriesQuantity >= :min')
+            ->from(Meal::class, 'm');
+
+        if (!empty($excludedIds)) {
+            $query
+                ->andWhere('m.id NOT IN (:excludedIds)')
+                ->setParameter('excludedIds', $excludedIds);
+        }
+
+        return (int) $query
+            ->andWhere('m.caloriesQuantity >= :min')
             ->andWhere('m.caloriesQuantity <= :max')
             ->setParameter('min', $calorie->getMin())
             ->setParameter('max', $calorie->getMax())
@@ -44,19 +52,46 @@ final class MealRepository implements MealRepositoryInterface
             ->getSingleScalarResult();
     }
 
-    public function findRandomInCalorieRange(Calorie $calorie): ?Meal
+    public function findRandomInCalorieRange(Calorie $calorie, array $excludedIds): ?Meal
+    {
+        $query = $this->entityManager
+            ->createQueryBuilder()
+            ->select('m')
+            ->from(Meal::class, 'm');
+
+        if (!empty($excludedIds)) {
+            $query
+                ->andWhere('m.id NOT IN (:excludedIds)')
+                ->setParameter('excludedIds', $excludedIds);
+        }
+
+        return $query
+            ->andWhere('m.caloriesQuantity >= :min')
+            ->andWhere('m.caloriesQuantity <= :max')
+            ->setParameter('min', $calorie->getMin())
+            ->setParameter('max', $calorie->getMax())
+            ->setMaxResults(1)
+            ->setFirstResult(rand(0, $this->countAllInCalorieRange($calorie, $excludedIds) - 1))
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
+    public function findAllInCalorieRangeWithoutMeat(Calorie $calorie): array
     {
         return $this->entityManager
             ->createQueryBuilder()
             ->select('m')
             ->from(Meal::class, 'm')
-            ->where('m.caloriesQuantity >= :min')
+            ->join('m.ingredients', 'i')
+            ->join('i.product', 'p')
+            ->join('p.productType', 'pt')
+            ->andWhere('pt.name = (:meatName)')
+            ->andWhere('m.caloriesQuantity >= :min')
             ->andWhere('m.caloriesQuantity <= :max')
+            ->setParameter('meatName', 'Mięso')
             ->setParameter('min', $calorie->getMin())
             ->setParameter('max', $calorie->getMax())
-            ->setMaxResults(1)
-            ->setFirstResult(rand(0, $this->countAllInCalorieRange($calorie) - 1))
             ->getQuery()
-            ->getOneOrNullResult();
+            ->getResult();
     }
 }
