@@ -1,6 +1,6 @@
 {
     "php": {
-        "version": "7.3"
+        "version": "7.4"
     },
     "squizlabs/php_codesniffer": {
         "version": "3.0",
