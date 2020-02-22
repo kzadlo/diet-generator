@@ -17,5 +17,5 @@ interface MealRepositoryInterface
 
     public function findRandomInCalorieRange(Calorie $calorie, array $excludedIds): ?Meal;
 
-    public function findAllInCalorieRangeWithoutMeat(Calorie $calorie): array;
+    public function findAllInCalorieRangeWithMeat(Calorie $calorie): array;
 }

@@ -22,6 +22,7 @@ class DietOptionTest extends TestCase
         $this->assertInstanceOf(UuidInterface::class, $this->dietOption->getId());
         $this->assertSame(DietOption::STANDARD_QUANTITY_DAYS, $this->dietOption->getDaysQuantity());
         $this->assertFalse($this->dietOption->hasMeatFriday());
+        $this->assertSame(0, $this->dietOption->getRepetitiveDaysQuantity());
     }
 
     public function testCanChangeQuantityDays(): void
@@ -43,5 +44,20 @@ class DietOptionTest extends TestCase
         $this->dietOption->deactivateMeatFriday();
 
         $this->assertFalse($this->dietOption->hasMeatFriday());
+    }
+
+    public function testCanChangeRepetitiveDays(): void
+    {
+        $this->dietOption->changeRepetitiveDaysQuantity(1);
+
+        $this->assertSame(1, $this->dietOption->getRepetitiveDaysQuantity());
+    }
+
+    public function testCannotBeMoreRepetitiveDaysThanDays(): void
+    {
+        $this->dietOption->changeDaysQuantity(5);
+        $this->dietOption->changeRepetitiveDaysQuantity(3);
+
+        $this->assertSame(2, $this->dietOption->getRepetitiveDaysQuantity());
     }
 }

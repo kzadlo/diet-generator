@@ -11,6 +11,8 @@
 
         <field name="hasMeatFriday" column="has_meat_friday" type="integer"/>
 
+        <field name="repetitiveDaysQuantity" column="repetitive_days_quantity" type="integer"/>
+
     </entity>
 
 </doctrine-mapping>

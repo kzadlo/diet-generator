@@ -48,6 +48,7 @@ final class DayTest extends TestCase
         $this->day->changeDate($date);
 
         $this->assertSame($date, $this->day->getDate());
+        $this->assertSame($date->format('D'), $this->day->getName());
     }
 
     public function testCanSetPeriod(): void

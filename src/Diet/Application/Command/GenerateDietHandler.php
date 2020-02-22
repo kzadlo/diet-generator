@@ -69,16 +69,25 @@ class GenerateDietHandler
                 $excludedMealIds = [];
                 $isWithMeat = $day->getName() !== 'Fri' || $day->isMeatFriday($dietPlan->getOption()->hasMeatFriday());
                 if (!$isWithMeat) {
-                    $mealsWithMeat = $this->mealRepository->findAllInCalorieRangeWithoutMeat($mealCalorie);
+                    $meatMeals = $this->mealRepository->findAllInCalorieRangeWithMeat($mealCalorie);
 
-                    /** @var Meal $mealWithMeat */
-                    foreach ($mealsWithMeat as $mealWithMeat) {
-                        $excludedMealIds[] = $mealWithMeat->getId();
-                    }
+                    $excludedMealIds = array_map(function (Meal $meatMeal) {
+                        return $meatMeal->getId();
+                    }, $meatMeals);
                 }
 
                 $meal = $this->mealRepository->findRandomInCalorieRange($mealCalorie, $excludedMealIds);
                 $day->addMeal($meal);
+            }
+
+            if ($dayNumber < ($dietPlan->getOption()->getRepetitiveDaysQuantity() * 2 )) {
+                $dayClone = clone $day;
+                $dateClone = \DateTimeImmutable::createFromMutable($dayClone->getDate());
+                $dayClone->changeDate($dateClone->modify('+1 days'));
+
+                $period->addDay($dayClone);
+
+                $dayNumber++;
             }
 
             $period->addDay($day);

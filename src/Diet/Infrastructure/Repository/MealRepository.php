@@ -76,7 +76,7 @@ final class MealRepository implements MealRepositoryInterface
             ->getOneOrNullResult();
     }
 
-    public function findAllInCalorieRangeWithoutMeat(Calorie $calorie): array
+    public function findAllInCalorieRangeWithMeat(Calorie $calorie): array
     {
         return $this->entityManager
             ->createQueryBuilder()

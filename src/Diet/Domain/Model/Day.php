@@ -29,6 +29,11 @@ class Day
         $this->meals = new ArrayCollection();
     }
 
+    public function __clone()
+    {
+        $this->id = Uuid::uuid4();
+    }
+
     public function getId(): UuidInterface
     {
         return $this->id;
@@ -52,6 +57,7 @@ class Day
     public function changeDate(\DateTimeInterface $date): Day
     {
         $this->date = $date;
+        $this->name = $date->format('D');
         return $this;
     }
 

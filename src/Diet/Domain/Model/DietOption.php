@@ -21,11 +21,14 @@ class DietOption
 
     private $hasMeatFriday;
 
+    private $repetitiveDaysQuantity;
+
     public function __construct()
     {
         $this->id = Uuid::uuid4();
         $this->daysQuantity = self::STANDARD_QUANTITY_DAYS;
         $this->hasMeatFriday = self::NOT_EAT_MEAT_FRIDAY;
+        $this->repetitiveDaysQuantity = 0;
     }
 
     public function getId(): UuidInterface
@@ -49,13 +52,30 @@ class DietOption
         return (bool) $this->hasMeatFriday;
     }
 
-    public function activateMeatFriday(): void
+    public function activateMeatFriday(): DietOption
     {
         $this->hasMeatFriday = self::EAT_MEAT_FRIDAY;
+        return $this;
     }
 
-    public function deactivateMeatFriday(): void
+    public function deactivateMeatFriday(): DietOption
     {
         $this->hasMeatFriday = self::NOT_EAT_MEAT_FRIDAY;
+        return $this;
+    }
+
+    public function changeRepetitiveDaysQuantity(int $repetitiveDaysQuantity): DietOption
+    {
+        if ($repetitiveDaysQuantity > ($this->daysQuantity / 2)) {
+            $repetitiveDaysQuantity = (int) ($this->daysQuantity / 2);
+        }
+
+        $this->repetitiveDaysQuantity = $repetitiveDaysQuantity;
+        return $this;
+    }
+
+    public function getRepetitiveDaysQuantity(): int
+    {
+        return $this->repetitiveDaysQuantity;
     }
 }

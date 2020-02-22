@@ -87,6 +87,10 @@ class GenerateDietHandlerTest extends TestCase
         $dietPlan = $this->prophesize(DietPlan::class);
 
         $dietOption
+            ->getRepetitiveDaysQuantity()
+            ->willReturn(1);
+
+        $dietOption
             ->hasMeatFriday()
             ->willReturn(false);
 
@@ -120,17 +124,14 @@ class GenerateDietHandlerTest extends TestCase
 
         $this->calorieCalculator
             ->calculatePermissibleMealCalories($owner, $dietType, Argument::type('integer'))
-            ->shouldBeCalledTimes(DietOption::STANDARD_QUANTITY_DAYS * DietType::MEALS_QUANTITY_FIVE)
             ->willReturn(new Calorie(500));
 
         $this->mealRepository
-            ->findAllInCalorieRangeWithoutMeat(Argument::type(Calorie::class))
-            ->shouldBeCalledTimes(DietType::MEALS_QUANTITY_FIVE)
+            ->findAllInCalorieRangeWithMeat(Argument::type(Calorie::class))
             ->willReturn([]);
 
         $this->mealRepository
             ->findRandomInCalorieRange(Argument::type(Calorie::class), [])
-            ->shouldBeCalledTimes(DietOption::STANDARD_QUANTITY_DAYS * DietType::MEALS_QUANTITY_FIVE)
             ->willReturn($meal->reveal());
 
         $this->periodRepository
