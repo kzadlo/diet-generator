@@ -52,7 +52,6 @@ class GenerateDietHandler
 
         $owner = $this->ownerRepository->findOneByEmail($generateDietCommand->getEmail());
         $dietPlan = $this->dietPlanRepository->findForOwner($owner);
-
         $period = new Period($dietPlan);
 
         for ($dayNumber = 0; $dayNumber < $dietPlan->getDaysQuantity(); $dayNumber++) {
@@ -61,11 +60,14 @@ class GenerateDietHandler
             $day = new Day($date);
 
             for ($mealNumber = 1; $mealNumber <= $dietPlan->getMealsQuantity(); $mealNumber++) {
-                $mealCalorie = $this->calorieCalculator
-                    ->calculatePermissibleMealCalories($owner, $dietPlan->getType(), $mealNumber);
+                $mealCalorie = $this->calorieCalculator->calculatePermissibleMealCalories(
+                    $owner,
+                    $dietPlan->getType(),
+                    $mealNumber
+                );
 
                 $excludedMealIds = [];
-                $isWithMeat = ($day->getName() !== 'Fri' || $day->isMeatFriday($dietPlan->getOption()->hasMeatFriday()));
+                $isWithMeat = $day->getName() !== 'Fri' || $day->isMeatFriday($dietPlan->getOption()->hasMeatFriday());
                 if (!$isWithMeat) {
                     $mealsWithMeat = $this->mealRepository->findAllInCalorieRangeWithoutMeat($mealCalorie);
 
@@ -76,7 +78,6 @@ class GenerateDietHandler
                 }
 
                 $meal = $this->mealRepository->findRandomInCalorieRange($mealCalorie, $excludedMealIds);
-
                 $day->addMeal($meal);
             }
 
