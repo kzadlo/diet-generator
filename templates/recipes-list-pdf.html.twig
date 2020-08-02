@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Diet Recipes</title>
+    <link type="text/css" rel="stylesheet" href="{{ public_path }}{{ asset('css/pdf.css') }}" />
+</head>
+<body>
+<div class="container">
+    <div class="diet-title-box">
+        <h1 class="diet-title">Przepisy</h1>
+    </div>
+    <div class="content">
+        {% for meal in recipes %}
+            <div class="meal-box">
+                <h3 class="meal-title"><em>{{ meal.mealName }}</em></h3>
+                <span class="calories">
+                    <img class="icon" src="{{ public_path }}{{ asset('icon/kcal.svg') }}" alt="kcal" />
+                    {{ meal.caloriesQuantity }} kcal
+                </span>
+                <div class="content-box">
+                        <span class="color-element content-title">
+                            Składniki
+                        <img class="icon" src="{{ public_path }}{{ asset('icon/ingredient.svg') }}" alt="ingredient" />
+                        </span>
+                        <div class="content-text">
+                            {% for productName,weight in meal.ingredients %}
+                                <span><em>{{ weight }}g</em> {{ productName }}{{ loop.last ? '' : ', ' }}</span>
+                            {% endfor %}
+                        </div>
+                </div>
+                <div class="content-box">
+                    <span class="color-element content-title">
+                        Sposób przygotowania
+                        <img class="icon" src="{{ public_path }}{{ asset('icon/menu.svg') }}" alt="menu" />
+                    </span>
+                    <div class="content-text">
+                        <ul class="recipe-list">
+                            {% for step in meal.steps %}
+                                <li>
+                                    <img class="icon" src="{{ public_path }}{{ asset('icon/step.svg') }}" alt="step" />
+                                    {{ step }}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+</body>
+</html>

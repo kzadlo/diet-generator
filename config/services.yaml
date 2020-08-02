@@ -30,3 +30,8 @@ services:
         arguments:
             - '@App\Diet\Application\QueryBus'
             - '@App\Diet\Application\Service\ShoppingListPdfGenerator'
+
+    App\Diet\Presentation\Console\PrepareRecipesListPdfConsole:
+        arguments:
+            - '@App\Diet\Application\QueryBus'
+            - '@App\Diet\Application\Service\RecipesListPdfGenerator'
