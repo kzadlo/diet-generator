@@ -29,7 +29,8 @@ class GetPeriodMealIngredientExecutor
             ->join('mtd', 'meal', 'm', 'mtd.meal_id = m.id')
             ->join('m', 'ingredient', 'i', 'm.id = i.meal_id')
             ->join('i', 'product', 'p', 'i.product_id = p.id')
-            ->where('d.period_id = :periodId')
+            ->andWhere('d.period_id = :periodId')
+            ->addOrderBy('i.weight', 'DESC')
             ->setParameter('periodId', $getPeriodMealIngredientQuery->getPeriodId());
 
         $data = $this->connection->fetchAll($queryBuilder->getSQL(), $queryBuilder->getParameters());

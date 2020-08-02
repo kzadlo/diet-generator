@@ -38,7 +38,7 @@ final class DietPlanRepository implements DietPlanRepositoryInterface
             ->from(DietPlan::class, 'dp')
             ->join('dp.dietType', 'dt')
             ->join('dp.dietOption', 'do')
-            ->where('dp.owner = :owner')
+            ->andWhere('dp.owner = :owner')
             ->setParameter('owner', $owner)
             ->getQuery()
             ->getOneOrNullResult();

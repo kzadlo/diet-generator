@@ -28,9 +28,11 @@ class GetPeriodMealRecipeExecutor
             ->join('mtd', 'meal', 'm', 'mtd.meal_id = m.id')
             ->join('m', 'recipe', 'r', 'm.recipe_id = r.id')
             ->join('r', 'recipe_step', 'rs', 'r.id = rs.recipe_id')
-            ->where('d.period_id = :periodId')
-            ->groupBy('rs.id')
-            ->orderBy('rs.order')
+            ->andWhere('d.period_id = :periodId')
+            ->addGroupBy('rs.id')
+            ->addGroupBy('rs.order')
+            ->addGroupBy('m.id')
+            ->addOrderBy('rs.order')
             ->setParameter('periodId', $getPeriodMealRecipeQuery->getPeriodId());
 
         $data = $this->connection->fetchAll($queryBuilder->getSQL(), $queryBuilder->getParameters());

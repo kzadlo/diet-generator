@@ -35,7 +35,7 @@ final class OwnerRepository implements OwnerRepositoryInterface
             ->createQueryBuilder()
             ->select('o')
             ->from(Owner::class, 'o')
-            ->where('o.email = :email')
+            ->andWhere('o.email = :email')
             ->setParameter('email', $email)
             ->getQuery()
             ->getOneOrNullResult();

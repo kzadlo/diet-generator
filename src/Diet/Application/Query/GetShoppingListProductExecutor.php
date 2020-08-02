@@ -20,6 +20,7 @@ class GetShoppingListProductExecutor
         $queryBuilder = $this->connection->createQueryBuilder();
         $queryBuilder
             ->select(
+                'p.id',
                 'p.name product_name',
                 'SUM(i.weight) weight',
                 'pt.name product_type_name'
@@ -29,9 +30,11 @@ class GetShoppingListProductExecutor
             ->join('i', 'meal', 'm', 'i.meal_id = m.id')
             ->join('m', 'meal_to_day', 'mtd', 'm.id = mtd.meal_id')
             ->join('mtd', 'day', 'd', 'mtd.day_id = d.id')
-            ->where('d.date BETWEEN :startDate AND :endDate')
-            ->groupBy('p.id')
-            ->orderBy('product_name')
+            ->andWhere('d.date BETWEEN :startDate AND :endDate')
+            ->addGroupBy('p.id')
+            ->addGroupBy('p.name')
+            ->addGroupBy('pt.name')
+            ->addOrderBy('product_name')
             ->setParameter('startDate', $getShoppingListProduct->getStartDate())
             ->setParameter('endDate', $getShoppingListProduct->getEndDate());
 

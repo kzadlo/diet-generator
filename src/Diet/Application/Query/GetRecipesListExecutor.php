@@ -35,12 +35,7 @@ class GetRecipesListExecutor
             ->join('i', 'product', 'p', 'i.product_id = p.id')
             ->addOrderBy('m.calories_quantity')
             ->addOrderBy('rs.order')
-            ->addOrderBy('i.weight', 'DESC')
-            ->addOrderBy('m.name')
-            ->addOrderBy('p.name')
-            ->addOrderBy('rs.description')
-            ->addOrderBy('m.id')
-            ->addOrderBy('i.id');
+            ->addOrderBy('i.weight', 'DESC');
 
         $data = $this->connection->fetchAll($queryBuilder->getSQL(), $queryBuilder->getParameters());
 
